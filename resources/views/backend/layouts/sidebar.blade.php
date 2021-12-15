@@ -16,7 +16,7 @@
                with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('dashboard')}}" class="nav-link">
                         <i class="fas fa-tachometer-alt nav-icon"></i>
                         <p>
                             Dashboard
@@ -36,7 +36,7 @@
 
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('guru.index')}}" class="nav-link">
                         <i class="fas fa-chalkboard-teacher nav-icon"></i>
                         <p>
                             Guru
@@ -54,13 +54,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link ">
+                            <a href="{{route('pengumuman.index')}}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Berita</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('pengumuman.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengumuman</p>
                             </a>
@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('galleri_video.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Galleri Video</p>
                             </a>

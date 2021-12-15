@@ -18,7 +18,9 @@ class CreateBeritaTable extends Migration
             $table->string('nama', 100);
             $table->date('tanggal_posting');
             $table->string('keterangan');
+            // $table->string('status',2);
             $table->enum('type', ['Berita', 'Pengumuman'])->default('Berita');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

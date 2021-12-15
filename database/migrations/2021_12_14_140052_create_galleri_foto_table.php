@@ -21,7 +21,7 @@ class CreateGalleriFotoTable extends Migration
             $table->enum('type', ['Prestasi', 'Galeri Foto'])->default('Prestasi');
         
             $table->unsignedBigInteger('foto_id');
-
+            $table->enum('status', ['1', '0'])->default('1');
             $table->softDeletes();
             $table->timestamps();
 

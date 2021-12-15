@@ -20,6 +20,8 @@ class CreateGuruTable extends Migration
             $table->date('tanggal_lahir');
             $table->string('wali_kelas',30);
             $table->date('mengajar_sejak');
+            $table->string('image');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

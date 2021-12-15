@@ -15,7 +15,10 @@ class GalleriVideoController extends Controller
      */
     public function index()
     {
-        //
+        $galleri_video = GalleriVideo::all();
+        // $user = User::where('person_id', '=', 1);
+        
+        return view('backend.galleri_video.index', ['galleri_video' => $galleri_video]);
     }
 
     /**
@@ -25,7 +28,7 @@ class GalleriVideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.galleri_video.tambah');
     }
 
     /**
@@ -36,7 +39,18 @@ class GalleriVideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'embed_link' => 'required',
+        ]);
+
+        $galleri_video = GalleriVideo::create($request->all());
+
+        if($galleri_video->save()) {
+            return redirect()->route('galleri_video.index')->with('success', 'Berhasil menambahkan data Galleri Video');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menambahkan data Galleri Video');
+        }
     }
 
     /**
@@ -58,7 +72,13 @@ class GalleriVideoController extends Controller
      */
     public function edit(GalleriVideo $galleriVideo)
     {
-        //
+        // $galleri_video = 
+        // echo '<pre>';
+        // var_dump($galleriVideo->all());
+        // die();
+
+        // dd($galleriVideo->get());
+        return view('backend.galleri_video.edit',compact('galleriVideo'));
     }
 
     /**
@@ -70,7 +90,22 @@ class GalleriVideoController extends Controller
      */
     public function update(Request $request, GalleriVideo $galleriVideo)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'embed_link' => 'required',
+        ]);
+
+        // $galleri_video = Galleri_video::find($id);
+        // $galleri_video->nis = $request->nis;
+        // $galleri_video->nama = $request->nama;
+
+        $galleriVideo->update($request->all());
+
+        if($galleriVideo) {
+            return redirect()->route('galleri_video.index')->with('success', 'Berhasil memperbarui data Galleri Video');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui data Galleri Video');
+        }
     }
 
     /**
@@ -81,6 +116,7 @@ class GalleriVideoController extends Controller
      */
     public function destroy(GalleriVideo $galleriVideo)
     {
-        //
+        $galleriVideo->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus!');
     }
 }

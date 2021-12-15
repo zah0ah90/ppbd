@@ -17,6 +17,7 @@ class CreateGalleriVideoTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('embed_link');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

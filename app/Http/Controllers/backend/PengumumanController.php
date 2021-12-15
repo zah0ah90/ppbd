@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Berita;
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 
-class BeritaController extends Controller
+
+class PengumumanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,10 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $berita = Berita::where('type', '=','berita')->get();
+        $pengumuman = Pengumuman::where('type', '=','pengumuman')->get();
         // $user = User::where('person_id', '=', 1);
         
-        return view('backend.berita.index', ['berita' => $berita]);
+        return view('backend.pengumuman.index', ['pengumuman' => $pengumuman]);
     }
 
     /**
@@ -28,7 +29,7 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('backend.berita.tambah');
+        return view('backend.pengumuman.tambah');
     }
 
     /**
@@ -39,28 +40,34 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
+        // $pengumuman = new Pengumuman();
+        // $pengumuman->nama = $request->nama;
+        // $pengumuman->type = $request->type;
+        // $pengumuman->tanggal_posting = $request->tanggal_posting;
+        // $pengumuman->keterangan = $request->keterangan;
+        
         $request->validate([
             'nama' => 'required',
             'keterangan' => 'required',
             'tanggal_posting' => 'required',
         ]);
 
-        $berita = Berita::create($request->all());
+        $pengumuman = Pengumuman::create($request->all());
 
-        if($berita->save()) {
-            return redirect()->route('berita.index')->with('success', 'Berhasil menambahkan data berita');
+        if($pengumuman->save()) {
+            return redirect()->route('pengumuman.index')->with('success', 'Berhasil menambahkan data pengumuman');
         } else {
-            return redirect()->back()->with('error', 'Gagal menambahkan data berita');
+            return redirect()->back()->with('error', 'Gagal menambahkan data pengumuman');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Berita  $berita
+     * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function show(Berita $berita)
+    public function show(Pengumuman $pengumuman)
     {
         //
     }
@@ -68,22 +75,22 @@ class BeritaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Berita  $berita
+     * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function edit(Berita $berita)
+    public function edit(Pengumuman $pengumuman)
     {
-        return view('backend.berita.edit');
+        return view('backend.pengumuman.edit',compact('pengumuman'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Berita  $berita
+     * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, Pengumuman $pengumuman)
     {
         $request->validate([
             'nama' => 'required',
@@ -95,24 +102,27 @@ class BeritaController extends Controller
         // $pengumuman->nis = $request->nis;
         // $pengumuman->nama = $request->nama;
 
-        $berita->update($request->all());
+        $pengumuman->update($request->all());
 
-        if($berita) {
-            return redirect()->route('berita.index')->with('success', 'Berhasil memperbarui data berita');
+        if($pengumuman) {
+            return redirect()->route('pengumuman.index')->with('success', 'Berhasil memperbarui data pengumuman');
         } else {
-            return redirect()->back()->with('error', 'Gagal memperbarui data berita');
+            return redirect()->back()->with('error', 'Gagal memperbarui data pengumuman');
         }
+
+        // $product->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Berita  $berita
+     * @param  \App\Models\Pengumuman  $pengumuman
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Berita $berita)
+    public function destroy(Pengumuman $pengumuman)
     {
-        $berita->delete();
+        $pengumuman->delete();
         return redirect()->back()->with('success', 'Berhasil Menghapus!');
+        // return redirect()->route('products.index')->with('success','Product deleted successfully');
     }
 }

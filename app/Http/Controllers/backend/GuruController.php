@@ -8,14 +8,17 @@ use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $guru = Guru::all();
+        // $user = User::where('person_id', '=', 1);
+        
+        return view('backend.guru.index', ['guru' => $guru]);
     }
 
     /**
@@ -25,7 +28,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.guru.tambah');
     }
 
     /**
@@ -35,8 +38,31 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $request->validate([
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required',
+            'wali_kelas' => 'required',
+            'mengajar_sejak' => 'required',
+        ]);
+
+        $input = $request->all();
+        if ($image = $request->file('image')) {
+
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+
+        $guru = Guru::create($input);
+
+        if($guru->save()) {
+            return redirect()->route('guru.index')->with('success', 'Berhasil menambahkan data guru');
+        } else {
+            return redirect()->back()->with('error', 'Gagal menambahkan data guru');
+        }
     }
 
     /**
@@ -58,7 +84,7 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        //
+        return view('backend.guru.edit',compact('guru'));
     }
 
     /**
@@ -70,7 +96,34 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required',
+            'wali_kelas' => 'required',
+            'mengajar_sejak' => 'required',
+        ]);
+
+        $input = $request->all();
+        if ($image = $request->file('image')) {
+
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }else{
+            unset($input['image']);
+        }
+
+        $guru->update($input);
+
+        if($guru) {
+            return redirect()->route('guru.index')->with('success', 'Berhasil memperbarui data guru');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui data guru');
+        }
+
+        // $product->update($request->all());
     }
 
     /**
@@ -81,6 +134,8 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        $guru->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus!');
+        // return redirect()->route('products.index')->with('success','Product deleted successfully');
     }
 }

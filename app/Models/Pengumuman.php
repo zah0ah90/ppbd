@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Guru extends Model
+class Pengumuman extends Model
 {
-    protected $table = 'tbl_guru';
+    protected $table = 'tbl_berita';
     use HasFactory,SoftDeletes;
 
     protected $fillable = [
         'nama',
-        'jenis_kelamin',
-        'tanggal_lahir',
-        'wali_kelas',
-        'mengajar_sejak',
-        'image',
+        'tanggal_posting',
+        'type',
+        'keterangan',
         'status'
     ];
 }
