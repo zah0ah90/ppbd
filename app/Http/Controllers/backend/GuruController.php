@@ -15,7 +15,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $guru = Guru::all();
+        $guru = Guru::paginate(10);
         // $user = User::where('person_id', '=', 1);
         
         return view('backend.guru.index', ['guru' => $guru]);
@@ -45,12 +45,12 @@ class GuruController extends Controller
             'tanggal_lahir' => 'required',
             'wali_kelas' => 'required',
             'mengajar_sejak' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $input = $request->all();
         if ($image = $request->file('image')) {
-
-            $destinationPath = 'image/';
+            $destinationPath = 'backend/image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
@@ -102,12 +102,13 @@ class GuruController extends Controller
             'tanggal_lahir' => 'required',
             'wali_kelas' => 'required',
             'mengajar_sejak' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $input = $request->all();
         if ($image = $request->file('image')) {
 
-            $destinationPath = 'image/';
+            $destinationPath = 'backend/image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
