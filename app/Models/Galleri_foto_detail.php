@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GalleriFoto extends Model
+class Galleri_foto_detail extends Model
 {
-    protected $table = 'tbl_galleri_foto';
+    protected $table = 'tbl_galleri_foto_detail';
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'nama',
+        'galleri_foto_id',
     ];
 }

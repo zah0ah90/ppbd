@@ -4,18 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\PengumumanController;
 use App\Http\Controllers\backend\BeritaController;
 use App\Http\Controllers\backend\GalleriVideoController;
+use App\Http\Controllers\backend\GalleriFotoController;
 use App\Http\Controllers\backend\GuruController;
-Auth::routes();
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+// Auth::routes();
+
+Route::get('login', 'App\Http\Controllers\AuthController@index')->name('login');
+Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login')->name('proses_login');
+Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
 Route::get('/', function () {
     // return view('welcome');
@@ -25,6 +21,7 @@ Route::get('/', function () {
 Route::resource('pengumuman', PengumumanController::class);
 Route::resource('berita', BeritaController::class);
 Route::resource('galleri_video', GalleriVideoController::class);
+Route::resource('galleri_foto', GalleriFotoController::class);
 Route::resource('guru', GuruController::class);
 
 

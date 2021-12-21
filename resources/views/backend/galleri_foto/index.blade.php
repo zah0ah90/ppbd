@@ -5,12 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Guru</h1>
+                <h1 class="m-0">Galleri_foto</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Guru</li>
+                    <li class="breadcrumb-item active">Galleri_foto</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('guru.create') }}" class="text-white btn btn-sm btn-primary tambah">
+                        <a href="{{ route('galleri_foto.create') }}" class="text-white btn btn-sm btn-primary tambah">
                             <i class="fas fa-plus"></i> Tambah Data</a>
                     </div>
                     <!-- /.card-header -->
@@ -36,33 +36,22 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Wali Kelas</th>
-                                    <th>Mengajar Sejak</th>
                                     <th>Foto</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($guru->count())
+                                @if($galleri_foto->count())
                                 @php($index = 1)
-                                @foreach($guru as $data)
+                                @foreach($galleri_foto as $data)
                                 <tr>
                                     <td align="center">{{ $index++ }}</td>
                                     <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->jenis_kelamin }}</td>
-                                    <td>{{ $data->tanggal_lahir }}</td>
-                                    <td>{{ $data->wali_kelas }}</td>
-                                    <td>{{ $data->mengajar_sejak }}</td>
-                                    <td><img src="{{ asset('backend/image/' . $data->image)  }}" alt="" width="200">
-                                    </td>
-                                    <td>{{ $data->status == 1 ? 'Tampilkan' : 'Tidak Tampilkan' }}</td>
+                                    <td></td>
                                     <td>
-                                        <form action="{{ route('guru.destroy',$data->id) }}" method="POST">
+                                        <form action="{{ route('galleri_foto.destroy',$data->id) }}" method="POST">
                                             <a class="btn btn-primary"
-                                                href="{{ route('guru.edit',$data->id) }}">Edit</a>
+                                                href="{{ route('galleri_foto.edit',$data->id) }}">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"

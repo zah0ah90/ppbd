@@ -4,11 +4,13 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\GalleriFoto;
+use App\Models\Galleri_foto_detail;
 use Illuminate\Http\Request;
+
 
 class GalleriFotoController extends Controller
 {
-  /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,7 +19,7 @@ class GalleriFotoController extends Controller
     {
         $gallerifoto = Gallerifoto::paginate(10);
         // $user = User::where('person_id', '=', 1);
-        
+
         return view('backend.galleri_foto.index', ['gallerifoto' => $gallerifoto]);
     }
 
@@ -38,28 +40,37 @@ class GalleriFotoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $request->validate([
             'nama' => 'required',
-            'jenis_kelamin' => 'required',
-            'tanggal_lahir' => 'required',
-            'wali_kelas' => 'required',
-            'mengajar_sejak' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $input = $request->all();
-        if ($image = $request->file('image')) {
-            $destinationPath = 'backend/image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
 
         $gallerifoto = Gallerifoto::create($input);
-        $gallerifoto->id;
+        $gallerifoto->save();
 
-        if($gallerifoto->save()) {
+        $files = [];
+        if ($request->hasfile('image')) {
+            foreach ($request->file('image') as $data) {
+                $name = time() . rand(1, 50) . '.' . $data->extension();
+                $data->move(public_path('image'), $name);
+                $files[] = $name;
+            }
+        }
+
+        // Galleri_foto_detail::insert()
+        $file = new Galleri_foto_detail();
+        $file->filenames = $files;
+        $file->galleri_foto_id = $gallerifoto->id;
+        $file->save();
+
+
+
+
+
+        if ($gallerifoto->save()) {
             return redirect()->route('gallerifoto.index')->with('success', 'Berhasil menambahkan data galleri foto');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data galleri foto');
@@ -85,7 +96,7 @@ class GalleriFotoController extends Controller
      */
     public function edit(Gallerifoto $gallerifoto)
     {
-        return view('backend.gallerifoto.edit',compact('gallerifoto'));
+        return view('backend.gallerifoto.edit', compact('gallerifoto'));
     }
 
     /**
@@ -113,13 +124,13 @@ class GalleriFotoController extends Controller
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
-        }else{
+        } else {
             unset($input['image']);
         }
 
         $gallerifoto->update($input);
 
-        if($gallerifoto) {
+        if ($gallerifoto) {
             return redirect()->route('gallerifoto.index')->with('success', 'Berhasil memperbarui data gallerifoto');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui data gallerifoto');

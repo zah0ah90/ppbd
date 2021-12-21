@@ -12,12 +12,18 @@ class CreateGalleriFotoDetailTable extends Migration
      * @return void
      */
     public function up()
-    { Schema::dropIfExists('tbl_galleri_foto_detail');
+    {
+        Schema::dropIfExists('tbl_galleri_foto_detail');
         Schema::create('tbl_galleri_foto_detail', function (Blueprint $table) {
-            $table->bigIncrements('id')->unsigned();
+            $table->bigIncrements('id');
             $table->string('nama');
+            $table->unsignedBigInteger('galleri_foto_id');
+
             $table->softDeletes();
             $table->timestamps();
+
+
+            $table->foreign('galleri_foto_id')->references('id')->on('tbl_galleri_foto');
         });
     }
 

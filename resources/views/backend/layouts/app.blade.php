@@ -19,6 +19,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('backend/adminlte/dist/css/adminlte.min.css') }}">
     <!-- <link rel="stylesheet" href="/asset/adminlte/dist/css/adminlte.min.css"> -->
+
+    <!-- jQuery -->
+    <!-- <script src="/asset/adminlte/plugins/jquery/jquery.min.js"></script> -->
+    <script src="{{ asset('backend/adminlte/plugins/jquery/jquery.min.js') }}"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -65,9 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
 
-    <!-- jQuery -->
-    <!-- <script src="/asset/adminlte/plugins/jquery/jquery.min.js"></script> -->
-    <script src="{{ asset('backend/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
     <!-- Bootstrap 4 -->
     <!-- <script src="/asset/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="{{ asset('backend/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
