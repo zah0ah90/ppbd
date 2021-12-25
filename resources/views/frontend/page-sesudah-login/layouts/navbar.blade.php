@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="landing-page-home.html">
             <div class="row">
-                <div class="col-sm-2"><img src="/asset/logo-sd.png" alt=""></div>
+                <div class="col-sm-2"><img src="{{ asset('frontend/gambar/logo-sd.png') }}" alt=""></div>
                 <div class="col-sm-9">
                     <div style="font-size: 30px;font-weight: bold;margin-top: -10px;">SD NEGERI NURUL SALAM <div
                             style="font-size: 15px;text-align: center;">Cerdas,

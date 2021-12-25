@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body >
 
     <!-- NAVBAR -->
     @include('frontend.page-belum-login.layouts.navbar')

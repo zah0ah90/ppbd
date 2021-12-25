@@ -6,7 +6,7 @@
   <div class="row">
 
       <div class="col-6">
-          <img src="/asset/pengumuman-home.png" alt="" style="width: 465px;">
+          <img src="{{ asset('frontend/gambar/pengumuman-home.png')}}" alt="" style="width: 465px;">
       </div>
       <div class="col-6">
           <p style="text-align: justify;">

@@ -16,7 +16,7 @@
                with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="{{route('dashboard')}}" class="nav-link">
+                    <a href="{{   route('dashboard.index')}}" class="nav-link">
                         <i class="fas fa-tachometer-alt nav-icon"></i>
                         <p>
                             Dashboard

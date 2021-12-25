@@ -5,8 +5,8 @@ border-radius: 5px;">
 
     <div class="card-body">
         <p style="text-align: center;"><b style="font-size: 23px;">BUAT AKUN</b></p>
-        <form action="#">
-
+        <form action="{{route('proses_login')}}" method="POST" id="logForm">
+            {{ csrf_field() }}
             <div class="form-group row">
                 <div class="col-sm-2">
                     <i class="far fa-envelope" style="font-size: 30px;
@@ -14,8 +14,11 @@ border-radius: 5px;">
                     margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="email"
-                        placeholder="Email">
+                    <input type="text" class="form-control" style="background:#C4C4C4;" name="username"
+                        placeholder="Username">
+                        @if($errors->has('username'))
+                        <span class="text-danger">{{ $errors->first('username') }}</span>
+                        @endif
                 </div>
             </div>
 
@@ -26,8 +29,11 @@ border-radius: 5px;">
                     margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" style="background:#C4C4C4;" name="Password"
+                    <input type="password" class="form-control" style="background:#C4C4C4;" name="password"
                         placeholder="Password">
+                        @if($errors->has('password'))
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                        @endif
                 </div>
             </div>
 
@@ -40,7 +46,7 @@ border-radius: 5px;">
         </form>
         <br>
         <br>
-        <p style="margin-bottom: 0px;">Belum Punya Akun? <a href="#">Daftar Disini!</a></p>
+        <p style="margin-bottom: 0px;">Belum Punya Akun? <a href="{{route('register')}}">Daftar Disini!</a></p>
     </div>
 </div>
 @endsection

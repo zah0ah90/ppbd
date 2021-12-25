@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/whatsapp.css">
+    {{-- <link rel="stylesheet" href="/css/whatsapp.css"> --}}
+    <link rel="stylesheet" href="{{ asset('frontend/css/whatsapp.css') }}">
     <title>Home</title>
 
 </head>
@@ -20,14 +21,15 @@
 <body>
 
     <!-- NAVBAR -->
-    @include('frontend.layouts.navbar')
+    @include('frontend.page-belum-login.layouts.navbar')
     <!-- AKHIR NAVBAR -->
 
     <!-- AWAL CARUSEL -->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/asset/carusel-home-1.png" class="d-block w-100" alt="...">
+                {{-- <img src="/asset/carusel-home-1.png" class="d-block w-100" alt="..."> --}}
+                <img src="{{ asset('frontend/gambar/carusel-home-1.png')  }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block"
                     style="bottom: 160px !important;color: black;font-weight: bold;">
                     <div class="container">
@@ -47,7 +49,8 @@
             </div>
 
             <div class="carousel-item">
-                <img src="/asset/carusel-home-2.png" class="d-block w-100" alt="">
+                {{-- <img src="/asset/carusel-home-2.png" class="d-block w-100" alt=""> --}}
+                <img src="{{ asset('frontend/gambar/carusel-home-2.png')  }}" class="d-block w-100" alt="">
                 <div class="carousel-caption d-none d-md-block">
                     <div class="card mx-auto" style="background: rgba(0, 0, 0, 0.3);
                     border-radius: 16px;width: 60%;">
@@ -141,8 +144,8 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="/asset/kepala-sekolah.png" alt="" style="width: 100%;
-                            height: 345px;">
+                            {{-- <img src="/asset/kepala-sekolah.png" alt="" style="width: 100%; height: 345px;"> --}}
+                            <img src="{{ asset('frontend/gambar/kepala-sekolah.png')  }}" alt="" style="width: 100%; height: 345px;">
                         </div>
                         <div class="col-md-7" style="text-align: justify;">
                             <p>
@@ -335,7 +338,7 @@
     </div>
 
 
-    @include('frontend.layouts.footer')
+    @include('frontend.page-belum-login.layouts.footer')
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -354,7 +357,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     -->
 
-    @include('frontend.layouts.whatsapp')
+    @include('frontend.page-belum-login.layouts.whatsapp')
 
 </body>
 

@@ -20,7 +20,7 @@
         </p>
     </div>
     <div class="col-6">
-        <img src="/asset/profile-sejarah.png" alt="">
+        <img src="{{asset('frontend/gambar/profile-sejarah.png')}}" alt="">
     </div>
 
 
