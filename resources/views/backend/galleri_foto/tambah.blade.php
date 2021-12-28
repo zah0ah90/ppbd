@@ -42,8 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Foto</label>
-                                <!-- <input type="file" class="form-control" name="image" id="image"
-                                    value="{{ old('image') }}"> -->
+                               
 
 
                                 <div class="input-group hdtuto control-group lst increment">
@@ -58,10 +57,8 @@
                                         <input type="file" name="image[]" class="myfrm form-control">
                                         <div class="input-group-btn">
                                             <button class="btn btn-danger" type="button"><i
-                                                    class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
-
+                                                    class="fldemo glyphicon glyphicon-remove test" ></i> Remove</button>
                                         </div>
-
                                     </div>
 
                                 </div>

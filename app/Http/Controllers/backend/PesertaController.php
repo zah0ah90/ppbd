@@ -15,7 +15,13 @@ class PesertaController extends Controller
      */
     public function index()
     {
-        //
+        $peserta = Peserta::get();
+        echo '<pre>';
+        var_dump($peserta);
+        die();
+        // $user = User::where('person_id', '=', 1);
+
+        return view('backend.peserta.index', ['peserta' => $peserta]);
     }
 
     /**

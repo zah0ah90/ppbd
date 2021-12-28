@@ -25,7 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('peserta.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-user-graduate"></i>
                         <p>
                             Peserta
@@ -33,6 +33,15 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{route('wali.index')}}" class="nav-link">
+                        {{-- <i class="fas fa-chalkboard-teacher nav-icon"></i> --}}
+                        <i class="fas fa-male nav-icon"></i>
+                        <p>
+                            Wali
+                        </p>
+                    </a>
+                </li>
 
 
                 <li class="nav-item">

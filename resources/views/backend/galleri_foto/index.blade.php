@@ -41,9 +41,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($galleri_foto->count())
+                                @if($gallerifoto->count())
                                 @php($index = 1)
-                                @foreach($galleri_foto as $data)
+                                @foreach($gallerifoto as $data)
                                 <tr>
                                     <td align="center">{{ $index++ }}</td>
                                     <td>{{ $data->nama }}</td>

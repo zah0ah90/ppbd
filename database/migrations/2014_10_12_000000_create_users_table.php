@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('nama');
             $table->string('nomor_handphone');
-            $table->string('level'); // baru
+            $table->string('level')->default('wali'); // baru
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

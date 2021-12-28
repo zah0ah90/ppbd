@@ -7,17 +7,20 @@
         <p style="text-align: center;"><b style="font-size: 23px;">BUAT AKUN</b></p>
         <form action="{{ route('proses_register') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            {{-- <div class="form-group row">
+            <div class="form-group row">
                 <div class="col-sm-2 ">
                     <i class="fas fa-child" style="font-size: 30px;
                                 margin-top: 4px;
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="namaAnak"
-                        placeholder="Nama Anak">
+                    <input type="text" class="form-control" style="background:#C4C4C4;" name="namaanak"
+                        placeholder="Nama Panggilan Anak">
+                    @if($errors->has('namaanak'))
+                    <small class="text-danger">{{ $errors->first('namaanak') }}</small>
+                    @endif
                 </div>
-            </div> --}}
+            </div>
 
             <div class="form-group row">
                 <div class="col-sm-2">
@@ -43,7 +46,7 @@
                 </div>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" style="background:#C4C4C4;" name="nama"
-                        placeholder="Nama Wali">
+                        placeholder="Nama Bapak Wali">
                     @if($errors->has('nama'))
                     <small class="text-danger">{{ $errors->first('nama') }}</small>
                     @endif
@@ -104,7 +107,7 @@
                 </div>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" style="background:#C4C4C4;" name="password_confirmation"
-                        placeholder="Password">
+                        placeholder="Password Confirmation">
                     @if($errors->has('password_confirmation'))
                     <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
                     @endif

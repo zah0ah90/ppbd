@@ -5,12 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Pengumuman</h1>
+                <h1 class="m-0">Wali</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard.index')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Pengumuman</li>
+                    <li class="breadcrumb-item active">Wali</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,39 +25,43 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <a href="{{ route('pengumuman.create') }}" class="text-white btn btn-sm btn-primary tambah">
-                            <i class="fas fa-plus"></i> Tambah Data</a>
-                    </div>
+                    
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
+                        <table class="table table-hover text-nowrap table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Tanggal Posting</th>
-                                    <th>status</th>
-                                    <th>Keterangan</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Nama Ayah Kandung</th>
+                                    <th>Nama Ibu Kandung</th>
+                                    <th>Alamat</th>
+                                    <th>Agama</th>
+                                    <th>Nomor KK</th>
+                                    <th>Nama Anak</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($pengumuman->count())
+                                @if($wali)
                                 @php($index = 1)
-                                @foreach($pengumuman as $data)
+                                @foreach($wali as $data)
                                 <tr>
                                     <td align="center">{{ $index++ }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->tanggal_posting }}</td>
-                                    <td>{{ $data->status == 1 ? 'Tampilkan' : 'Tidak Tampilkan' }}</td>
-                                    <td>{{ $data->keterangan }}</td>
+                                    <td>{{ $data->username }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->nama_ayah_kandung }}</td>
+                                    <td>{{ $data->nama_ibu_kandung }}</td>
+                                    <td>{{ $data->alamat }}</td>
+                                    <td>{{ $data->agama }}</td>
+                                    <td>{{ $data->nomor_kk }}</td>
+                                    <td>{{ $data->nama_anak }}</td>
                                     <td>
-                                        
                                         <a class="btn btn-primary"
-                                        href="{{ route('pengumuman.edit',$data->id) }}">Edit</a>
+                                        href="{{ route('wali.edit',$data->id) }}">Edit</a>
                                         <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            <form action="{{ route('pengumuman.destroy',$data->id) }}" 
+                                            <form action="{{ route('wali.destroy',$data->id) }}" 
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')

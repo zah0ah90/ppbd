@@ -23,6 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     <!-- <script src="/asset/adminlte/plugins/jquery/jquery.min.js"></script> -->
     <script src="{{ asset('backend/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
+    @stack('page-style')
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -76,6 +78,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <!-- <script src="/asset/adminlte/dist/js/adminlte.min.js"></script> -->
     <script src="{{ asset('backend/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/js/sweetalert.min.js') }}"></script>
+    
+
+    @stack('page-script')
 </body>
 
 </html>

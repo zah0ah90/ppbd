@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -59,16 +60,35 @@ class AuthController extends Controller
             'nama' => 'required|min:4|max:50',
             'username' => 'required|unique:users|min:4|max:50',
             'email' => 'required|email|unique:users',
-            'nomor_handphone' => 'required|min:6',
+            // 'nomor_handphone' => 'required|min:6',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6'
         ]);
 
         $data = $request->all();
         $user = $this->create($data);
+        $user->save();
 
-        if ($user->save()) {
-            return redirect()->route('dashboard-home')->with('success', 'Berhasil menambahkan data user');
+        $insert_wali = DB::table('tbl_wali')->insertGetId(
+            [
+                'nama_ayah_kandung' => $request->nama,
+                'user_id' => $user->id,
+                'nomor_handphone_ayah' => $request->nomor_handphone
+            ]
+        );
+
+        $insert_peserta = DB::table('tbl_peserta')->insert([
+            'wali_id' => $insert_wali,
+            'no_pendaftaran' => '1'
+        ]);
+
+
+
+
+
+
+        if ($insert_peserta) {
+            return redirect()->route('/')->with('success', 'Berhasil menambahkan data user');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data user');
         }

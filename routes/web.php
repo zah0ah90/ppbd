@@ -62,9 +62,9 @@ Route::group(['middleware' => ['auth']], function () {
     		Route Khusus untuk role editor
     	*/
         // Route::resource('editor', AdminController::class);
-        // Route::any('/', function () {
-        //     echo 'editor';
-        // });
+        Route::any('/', function () {
+            echo 'WALI';
+        });
     });
 
     Route::group(['middleware' => ['cek_login:super_user']], function () {
