@@ -12,9 +12,25 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+    }
+
+
     public function index()
     {
-        return view('frontend.page-belum-login.akun-login');
+        $user = false;
+        $user = Auth::user();
+        if ($user == '') {
+            return view('frontend.page-belum-login.akun-login');
+        } else if ($user->level == 'admin') {
+            return redirect('dashboard');
+            // ->intended('admin');
+        } else if ($user->level == 'wali') {
+            return redirect('dashboard-wali');
+        } else if ($user->level == 'super_user') {
+            return redirect('dashboard');
+        }
     }
     public function proses_login(Request $request)
     {
@@ -51,7 +67,18 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('frontend.page-belum-login.akun-daftar');
+        $user = false;
+        $user = Auth::user();
+        if ($user == '') {
+            return view('frontend.page-belum-login.akun-daftar');
+        } else if ($user->level == 'admin') {
+            return redirect('dashboard');
+            // ->intended('admin');
+        } else if ($user->level == 'wali') {
+            return redirect('dashboard-wali');
+        } else if ($user->level == 'super_user') {
+            return redirect('dashboard');
+        }
     }
 
     public function proses_register(Request $request)

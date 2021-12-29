@@ -10,27 +10,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
     <style>
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+       
         .button-tambahan-shadow {
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-    }
+        }
 
-    .input-tambahan-shadow {
-        background: #FFFFFF;
-        box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 5px;
-    }
+        .input-tambahan-shadow {
+            background: #FFFFFF;
+            box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+        }
     </style>
 
+    <link rel="stylesheet" href="{{ asset('backend/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 
-    <link rel="stylesheet" href="/css/whatsapp.css">
+
+    <link rel="stylesheet" href="{{asset('frontend/css/whatsapp.css')}}">
     <title>HOME</title>
 </head>
 

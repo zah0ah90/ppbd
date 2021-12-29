@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\PesertaController;
 use App\Http\Controllers\backend\WaliController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backendwali\DashboardWaliController;
 
 // Auth::routes();
 
@@ -23,6 +24,15 @@ Route::get('/gallerifoto', [HomeController::class, 'gallerifoto'])->name('galler
 Route::get('/gallerivideo', [HomeController::class, 'gallerivideo'])->name('gallerivideo-frontend');
 Route::get('/visi_misi', [HomeController::class, 'visi_misi'])->name('visi_misi-frontend');
 
+Route::get('/dashboard-wali', [DashboardWaliController::class, 'index'])->name('dashboard-wali');
+Route::get('/alur_pendaftaran', [DashboardWaliController::class, 'alur_pendaftaran'])->name('alur_pendaftaran');
+Route::get('/pengumuman_wali', [DashboardWaliController::class, 'pengumuman_wali'])->name('pengumuman_wali');
+Route::get('/persyaratan_wali', [DashboardWaliController::class, 'persyaratan_wali'])->name('persyaratan_wali');
+Route::get('/edit_profile_wali', [DashboardWaliController::class, 'edit_profile_wali'])->name('edit_profile_wali');
+Route::get('/profile_peserta', [DashboardWaliController::class, 'profile_peserta'])->name('profile_peserta');
+
+
+
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
@@ -34,7 +44,7 @@ Route::post('proses_register', [AuthController::class, 'proses_register'])->name
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/pengumuman', [AuthController::class, 'logout'])->name('logout');
+// Route::get('/pengumuman', [AuthController::class, 'logout'])->name('logout');
 
 
 
@@ -62,9 +72,9 @@ Route::group(['middleware' => ['auth']], function () {
     		Route Khusus untuk role editor
     	*/
         // Route::resource('editor', AdminController::class);
-        Route::any('/', function () {
-            echo 'WALI';
-        });
+        // Route::any('/', function () {
+        //     echo 'WALI';
+        // });
     });
 
     Route::group(['middleware' => ['cek_login:super_user']], function () {

@@ -8,16 +8,14 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
-
-
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                <i class="fas fa-align-right"></i>
+                {{-- <i class="fas fa-align-right"></i> --}}
+                <i class="fas fa-user-circle"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item dropdown-footer">Logout</a>
+                <a href="{{route('logout')}}" class="dropdown-item dropdown-footer">Logout</a>
             </div>
         </li>
 
