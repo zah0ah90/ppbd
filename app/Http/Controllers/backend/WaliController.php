@@ -36,7 +36,7 @@ class WaliController extends Controller
      */
     public function create()
     {
-        return view('backend.wali.tambah');
+        // return view('backend.wali.tambah');
     }
 
     /**
@@ -53,19 +53,19 @@ class WaliController extends Controller
         // $wali->tanggal_posting = $request->tanggal_posting;
         // $wali->keterangan = $request->keterangan;
 
-        $request->validate([
-            'nama' => 'required',
-            'keterangan' => 'required',
-            'tanggal_posting' => 'required',
-        ]);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'keterangan' => 'required',
+        //     'tanggal_posting' => 'required',
+        // ]);
 
-        $wali = Wali::create($request->all());
+        // $wali = Wali::create($request->all());
 
-        if ($wali->save()) {
-            return redirect()->route('wali.index')->with('success', 'Berhasil menambahkan data wali');
-        } else {
-            return redirect()->back()->with('error', 'Gagal menambahkan data wali');
-        }
+        // if ($wali->save()) {
+        //     return redirect()->route('wali.index')->with('success', 'Berhasil menambahkan data wali');
+        // } else {
+        //     return redirect()->back()->with('error', 'Gagal menambahkan data wali');
+        // }
     }
 
     /**

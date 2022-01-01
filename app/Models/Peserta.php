@@ -33,7 +33,7 @@ class Peserta extends Model
         'bertempat_tinggal_bersama',
         'foto_akta_lahir',
         'foto_kartu_keluarga',
-        'foto_surat_pernyataan'
+        'foto_surat_pernyataan',
 
     ];
 }

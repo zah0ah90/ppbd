@@ -15,12 +15,12 @@ class CreateGuruTable extends Migration
     {
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama',100);
-            $table->string('jenis_kelamin',10);
+            $table->string('nama', 100);
+            $table->string('jenis_kelamin', 10);
             $table->date('tanggal_lahir');
-            $table->string('wali_kelas',30);
+            $table->string('wali_kelas', 30);
             $table->date('mengajar_sejak');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('status', ['1', '0'])->default('1');
             $table->softDeletes();
             $table->timestamps();

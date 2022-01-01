@@ -57,14 +57,15 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::any('/', function () {
         //     echo 'admin';
         // });
-
+        Route::patch('peserta/{id}', 'PesertaController@update')->name('peserta-update');
+        Route::resource('peserta', PesertaController::class);
         Route::resource('pengumuman', PengumumanController::class);
         Route::resource('berita', BeritaController::class);
         Route::resource('galleri_video', GalleriVideoController::class);
         Route::resource('galleri_foto', GalleriFotoController::class);
         Route::resource('guru', GuruController::class);
         Route::resource('dashboard', DashboardController::class);
-        Route::resource('peserta', PesertaController::class);
+
         Route::resource('wali', WaliController::class);
     });
     Route::group(['middleware' => ['cek_login:wali']], function () {

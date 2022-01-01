@@ -32,23 +32,32 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Tanggal Posting</th>
+                                    <th>No Pendaftaran</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Nama Panggilan</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Nama Ayah</th>
+                                    <th>Nama Ibu</th>
+                                    <th>Agama</th>
                                     <th>status</th>
-                                    <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($peserta->count())
+                                @if($peserta)
                                 @php($index = 1)
                                 @foreach($peserta as $data)
                                 <tr>
                                     <td align="center">{{ $index++ }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->tanggal_posting }}</td>
-                                    <td>{{ $data->status == 1 ? 'Tampilkan' : 'Tidak Tampilkan' }}</td>
-                                    <td>{{ $data->keterangan }}</td>
+                                    <td>{{ $data->no_pendaftaran }}</td>
+                                    <td>{{ $data->nama_lengkap_siswa }}</td>
+                                    <td>{{ $data->nama_panggilan }}</td>
+                                    <td>{{ $data->jenis_kelamin }}</td>
+                                    <td>{{ $data->nama_ayah_kandung }}</td>
+                                    <td>{{ $data->nama_ibu_kandung }}</td>
+                                    <td>{{ $data->agama }}</td>
+                                    {{-- $res = ( $rule1 ? true : ( $rule2 ? true : false ) ) --}}
+                                    <td>{{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : 'Di Proses') }}</td>
                                     <td>
                                         
                                         <a class="btn btn-primary"

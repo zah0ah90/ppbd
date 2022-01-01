@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('nomor_handphone');
             $table->string('level')->default('wali'); // baru
             $table->string('email')->unique();
+            $table->string('foto')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

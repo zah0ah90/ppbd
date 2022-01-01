@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Peserta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PesertaController extends Controller
 {
@@ -15,10 +16,21 @@ class PesertaController extends Controller
      */
     public function index()
     {
-        $peserta = Peserta::get();
-        echo '<pre>';
-        var_dump($peserta);
-        die();
+        $peserta = DB::select(
+            "SELECT a.no_pendaftaran, a.nama_lengkap_siswa, a.nama_panggilan, a.jenis_kelamin, a.agama, a.status,
+            a.wali_id, a.id, b.nama_ibu_kandung, b.nama_ayah_kandung
+           
+            FROM tbl_peserta as a
+            LEFT JOIN tbl_wali as b ON a.wali_id=b.id
+            "
+        );
+
+
+
+        // $peserta = Peserta::get();
+        // echo '<pre>';
+        // var_dump($peserta);
+        // die();
         // $user = User::where('person_id', '=', 1);
 
         return view('backend.peserta.index', ['peserta' => $peserta]);
@@ -62,9 +74,10 @@ class PesertaController extends Controller
      * @param  \App\Models\Peserta  $peserta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Peserta $peserta)
+    public function edit($id)
     {
-        //
+        $peserta = Peserta::findOrFail($id);
+        return view('backend.peserta.edit', ['peserta' =>  $peserta]);
     }
 
     /**
@@ -76,7 +89,21 @@ class PesertaController extends Controller
      */
     public function update(Request $request, Peserta $peserta)
     {
-        //
+        echo 'wkwkwk' . $peserta;
+        die();
+        $request->validate([]);
+
+        // $wali = Wali::find($id);
+        // $wali->nis = $request->nis;
+        // $wali->nama = $request->nama;
+
+        $peserta->update($request->all());
+
+        if ($peserta) {
+            return redirect()->route('peserta.index')->with('success', 'Berhasil memperbarui data peserta');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui data peserta');
+        }
     }
 
     /**
@@ -87,6 +114,9 @@ class PesertaController extends Controller
      */
     public function destroy(Peserta $peserta)
     {
-        //
+        // echo 'wkwkwkw';
+        // die();
+        $peserta->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus!');
     }
 }

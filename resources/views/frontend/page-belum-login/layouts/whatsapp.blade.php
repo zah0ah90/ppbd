@@ -41,7 +41,7 @@
     </div>
 
     <a class='chatStart'
-        href='https://api.whatsapp.com/send?phone=6280000000000&text=Assalamualaikum,%20Saya%20ingin%20bertanya'
+        href='https://api.whatsapp.com/send?phone=6283821540986&text=Assalamualaikum,%20Saya%20ingin%20bertanya'
         rel='nofollow noreferrer' target='_blank'>
         <span>Mulai chat...</span>
     </a>

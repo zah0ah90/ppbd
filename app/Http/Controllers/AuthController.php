@@ -106,7 +106,8 @@ class AuthController extends Controller
 
         $insert_peserta = DB::table('tbl_peserta')->insert([
             'wali_id' => $insert_wali,
-            'no_pendaftaran' => '1'
+            'no_pendaftaran' => '1',
+            'status' => '2'
         ]);
 
 
