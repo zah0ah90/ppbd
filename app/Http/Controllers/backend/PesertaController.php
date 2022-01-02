@@ -5,9 +5,12 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Peserta;
 use App\Models\Wali;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PesertaController extends Controller
 {
@@ -226,5 +229,56 @@ class PesertaController extends Controller
         // die();
 
         return view('frontend.page-sesudah-login.pengumuman', ['peserta' => $peserta]);
+    }
+
+    public function profil_ku_wali()
+    {
+        $cek_login_wali = Auth::id();
+        // $cek_tabel_peserta = DB::table('tbl_peserta')->where('user_id', $cek_login_wali)->get();
+
+        $peserta = DB::select(
+            "SELECT a.no_pendaftaran, a.nama_lengkap_siswa,  a.jenis_kelamin,  a.status, a.tanggal_daftar, a.tanggal_lahir,
+            a.wali_id, a.id, b.nama_ibu_kandung, b.nama_ayah_kandung, a.user_id, b.nomor_handphone_ibu, b.nomor_handphone_ayah, a.alamat,
+            a.user_id, c.username, c.email
+           
+            FROM tbl_peserta as a
+            LEFT JOIN tbl_wali as b ON a.wali_id=b.id
+            LEFT JOIN users as c ON a.user_id=c.id
+            WHERE a.user_id='$cek_login_wali'
+            "
+        );
+
+        return view('frontend.page-sesudah-login.show-profile', ['peserta' => $peserta]);
+    }
+
+    public function edit_profile_wali()
+    {
+        $cek_login_wali = Auth::id();
+        $akun   = User::where(['id' => $cek_login_wali])->first();
+        // echo '<pre>';
+        // print_r($akun);
+        // die();
+        return view('frontend.page-sesudah-login.edit-profile', ['akun' => $akun]);
+    }
+
+    public function ubah_password(Request $request)
+    {
+        $cek_login_wali = Auth::id();
+        $request->validate([
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6'
+        ]);
+
+        $update =  DB::table('users')->where('id', $cek_login_wali)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        if ($update) {
+            Alert::success('Berhasil', 'Berhasil Meng Ubah Password');
+            return redirect()->route('dashboard-wali');
+        } else {
+            Alert::error('Gagal', 'Gagal Meng Ubah Password');
+            return redirect()->back();
+        }
     }
 }

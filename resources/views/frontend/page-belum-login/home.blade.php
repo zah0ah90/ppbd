@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- <link rel="stylesheet" href="/css/whatsapp.css"> --}}
+    {{--
+    <link rel="stylesheet" href="/css/whatsapp.css"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/whatsapp.css') }}">
     <title>Home</title>
 
@@ -40,7 +41,7 @@
                                         TELAH DIBUKA!
                                         2021/2022</h2>
                                 </b>
-                                <button type="button" class="btn btn-primary mt-4 text-dark">DAFTAR ONLINE</button>
+                                <a href="{{route('login')}}" class="btn btn-primary mt-4 text-dark">DAFTAR ONLINE</a>
                             </div>
                             <div class="col-sm-4"></div>
                         </div>
@@ -145,7 +146,8 @@
                     <div class="row">
                         <div class="col-md-5">
                             {{-- <img src="/asset/kepala-sekolah.png" alt="" style="width: 100%; height: 345px;"> --}}
-                            <img src="{{ asset('frontend/gambar/kepala-sekolah.png')  }}" alt="" style="width: 100%; height: 345px;">
+                            <img src="{{ asset('frontend/gambar/kepala-sekolah.png')  }}" alt=""
+                                style="width: 100%; height: 345px;">
                         </div>
                         <div class="col-md-7" style="text-align: justify;">
                             <p>

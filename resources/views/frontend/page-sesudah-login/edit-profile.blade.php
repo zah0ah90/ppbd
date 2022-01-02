@@ -9,84 +9,56 @@
 
         <div class="card w-75 mx-auto p-5" style="background: rgba(0, 0, 0, 0.08);">
             <div class="card-body">
-                <form action="#">
+                <form action="{{ route('ubah-password-wali') }}" method="POST">
+                    @csrf
                     <div class="row form-group">
                         <div class="col-4">
-                            <label for="">Nama Siswa </label>
+                            <label for="">Username</label>
                         </div>
                         <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
+                            <input type="text" class="input-tambahan-shadow form-control" value="{{$akun->username}}"
+                                disabled>
                         </div>
                     </div>
-
-                    <div class="row form-group">
-                        <div class="col-4">
-                            <label for="">Tempat Tanggal Lahir </label>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-4">
-                            <label for="">Jenis Kelamin </label>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-4">
-                            <label for="">Nama Wali/ Orang Tua </label>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
-                        </div>
-                    </div>
-
-
-                    <div class="row form-group">
-                        <div class="col-4">
-                            <label for="">Alamat</label>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
-                        </div>
-                    </div>
-
-
-                    <div class="row form-group">
-                        <div class="col-4">
-                            <label for="">No. HP/ Whatsapp </label>
-                        </div>
-                        <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
-                        </div>
-                    </div>
-
 
                     <div class="row form-group">
                         <div class="col-4">
                             <label for="">Email </label>
                         </div>
                         <div class="col-8">
-                            <input type="text" class="input-tambahan-shadow form-control">
+                            <input type="text" class="input-tambahan-shadow form-control" value="{{$akun->email}}"
+                                disabled>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-4">
-                            <label for="">Foto Siswa </label>
+                            <label for="">Password </label>
                         </div>
                         <div class="col-8">
-                            <input type="text" class="w-50 input-tambahan-shadow form-control">
-                            <br> <button class="button-tambahan-shadow btn btn-secondary text-dark">Unggah
-                                Foto</button>
+                            <input type="password" class="input-tambahan-shadow form-control" name="password"
+                                placeholder="Password">
+                            @if ($errors->has('password'))
+                            <small class="text-danger">{{ $errors->first('password') }}</small>
+                            @endif
                         </div>
                     </div>
-                    <button class="btn btn-primary text-dark button-tambahan-shadow">Simpan Data</button>
+
+                    <div class="row form-group">
+                        <div class="col-4">
+                            <label for="">Password Confirmation </label>
+                        </div>
+                        <div class="col-8">
+                            <input type="password" class="input-tambahan-shadow form-control"
+                                name="password_confirmation" placeholder="Password Confirmation">
+                            @if ($errors->has('password_confirmation'))
+                            <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
+                            @endif
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-primary text-light button-tambahan-shadow">Edit Password</button>
                 </form>
 
             </div>

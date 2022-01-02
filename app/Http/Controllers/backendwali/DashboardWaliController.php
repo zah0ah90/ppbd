@@ -32,10 +32,7 @@ class DashboardWaliController extends Controller
         return view('frontend.page-sesudah-login.persyaratan');
     }
 
-    public function edit_profile_wali()
-    {
-        return view('frontend.page-sesudah-login.edit-profile');
-    }
+
 
     public function profile_peserta()
     {

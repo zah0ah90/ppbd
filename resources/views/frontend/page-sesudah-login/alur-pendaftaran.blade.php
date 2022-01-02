@@ -8,15 +8,13 @@
 
             <br>
 
-            <button class="btn text-dark btn-secondary btn-block button-tambahan-shadow"><i class="fas fa-user-plus"></i>
-                Lengkapi
-                Profile</button>
-            <button class="btn text-dark btn-warning btn-block button-tambahan-shadow isi-data-siswa"><i
+
+            <button class="btn  btn-warning btn-block button-tambahan-shadow isi-data-siswa text-light"><i
                     class="fas fa-user-plus"></i> Isi Data Siswa</button>
-            <button class="btn text-dark btn-info btn-block button-tambahan-shadow isi-data-wali    "><i
-                    class="fas fa-user-plus"></i> Isi Data Orang Tua/
+            <button class="btn  btn-info btn-block button-tambahan-shadow isi-data-wali    "><i class="fas fa-user-plus"></i>
+                Isi Data Orang Tua/
                 Wali</button>
-            <button class="btn text-dark btn-primary btn-block button-tambahan-shadow" data-toggle="modal"
+            <button class="btn  btn-primary btn-block button-tambahan-shadow text-light" data-toggle="modal"
                 data-target="#isi-data-dokumen"><i class="far fa-file"></i> Unggah Dokumen</button>
 
         </div>
@@ -347,7 +345,7 @@
     <script src="{{ asset('backend/js/sweetalert.min.js') }}"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js
-                                                                                                                                                                                                            ">
+                                                                                                                                                                                                                                        ">
     </script>
     <script type="text/javascript">
         $(document).ready(function() {

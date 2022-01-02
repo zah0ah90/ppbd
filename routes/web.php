@@ -59,12 +59,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     // ROUTE UNTUK WALI
     Route::group(['middleware' => ['cek_login:wali']], function () {
-        Route::get('/dashboard-wali', [DashboardWaliController::class, 'index'])->name('dashboard-wali');
-        Route::get('/alur_pendaftaran', [DashboardWaliController::class, 'alur_pendaftaran'])->name('alur_pendaftaran');
+        Route::get('dashboard-wali', [DashboardWaliController::class, 'index'])->name('dashboard-wali');
+        Route::get('alur_pendaftaran', [DashboardWaliController::class, 'alur_pendaftaran'])->name('alur_pendaftaran');
         // Route::get('/pengumuman_wali', [DashboardWaliController::class, 'pengumuman_wali'])->name('pengumuman_wali');
-        Route::get('/persyaratan_wali', [DashboardWaliController::class, 'persyaratan_wali'])->name('persyaratan_wali');
-        Route::get('/edit_profile_wali', [DashboardWaliController::class, 'edit_profile_wali'])->name('edit_profile_wali');
-        Route::get('/profile_peserta', [DashboardWaliController::class, 'profile_peserta'])->name('profile_peserta');
+        Route::get('persyaratan_wali', [DashboardWaliController::class, 'persyaratan_wali'])->name('persyaratan_wali');
+
+        Route::get('profile_peserta', [DashboardWaliController::class, 'profile_peserta'])->name('profile_peserta');
 
         Route::get('edit-isi-data-siswa', [PesertaController::class, 'edit_isi_data_siswa'])->name('edit-data-siswa');
         Route::post('update-isi-data-siswa', [PesertaController::class, 'update_isi_data_siswa'])->name('update-isi-data-siswa');
@@ -73,15 +73,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update-isi-data-wali', [PesertaController::class, 'update_isi_data_wali'])->name('update-isi-data-wali');
 
         Route::get('pengumuman-status-siswa', [PesertaController::class, 'pengumuman_peserta_status'])->name('pengumuman-status-siswa');
-    });
 
-    Route::group(['middleware' => ['cek_login:super_user']], function () {
-        /*
-    		Route Khusus untuk role editor
-    	*/
-        // Route::resource('editor', AdminController::class);
-        // Route::any('/', function () {
-        //     echo 'editor';
-        // });
+        Route::get('profile-ku-siswa', [PesertaController::class, 'profil_ku_wali'])->name('profile-ku-siswa');
+
+        Route::get('edit-profile-wali', [PesertaController::class, 'edit_profile_wali'])->name('edit_profile_wali');
+        Route::post('ubah-password', [PesertaController::class, 'ubah_password'])->name('ubah-password-wali');
     });
 });

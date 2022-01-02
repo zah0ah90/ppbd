@@ -8,6 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <style>
         .button-tambahan-shadow {
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -31,7 +33,6 @@
             font-size: 18px;
             color: red;
         }
-
     </style>
 
     <link rel="stylesheet" href="{{ asset('backend/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -42,14 +43,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body>
-
+<body style="height: auto;">
+    @include('sweetalert::alert')
     <!-- NAVBAR -->
     @include('frontend.page-sesudah-login.layouts.navbar')
     <!-- AKHIR NAVBAR -->
 
 
-    <div style="background: #ffff;">
+    <div style="background: #ffff;height: 778px;">
         <div class="container">
             <!-- AWAL CONTAINER -->
             <br>
@@ -71,8 +72,7 @@
 
     <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 

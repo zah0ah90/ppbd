@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -24,12 +23,12 @@ class AuthController extends Controller
         if ($user == '') {
             return view('frontend.page-belum-login.akun-login');
         } else if ($user->level == 'admin') {
+            Alert::info('Anda Sudah Login', 'Admin');
             return redirect('dashboard');
             // ->intended('admin');
         } else if ($user->level == 'wali') {
+            Alert::info('Anda Sudah Login', 'Wali Peserta');
             return redirect('dashboard-wali');
-        } else if ($user->level == 'super_user') {
-            return redirect('dashboard');
         }
     }
     public function proses_login(Request $request)
@@ -47,12 +46,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->level == 'admin') {
+                Alert::success('Berhasil', 'Berhasil Login Admin');
                 return redirect('dashboard');
                 // ->intended('admin');
             } else if ($user->level == 'wali') {
-                return redirect()->intended('wali');
-            } else if ($user->level == 'super_user') {
-                return redirect()->intended('super_user');
+                Alert::success('Berhasil', 'Berhasil Login Wali Peserta');
+                return redirect('dashboard-wali');
             }
             // return redirect('/');
         }
@@ -61,6 +60,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
+        Alert::success('Anda Berhasil Logout', '');
         Auth::logout();
         return Redirect('login');
     }
@@ -72,12 +72,11 @@ class AuthController extends Controller
         if ($user == '') {
             return view('frontend.page-belum-login.akun-daftar');
         } else if ($user->level == 'admin') {
+            Alert::info('Anda Sudah Login', 'Admin');
             return redirect('dashboard');
-            // ->intended('admin');
         } else if ($user->level == 'wali') {
+            Alert::info('Anda Sudah Login', 'Wali Peserta');
             return redirect('dashboard-wali');
-        } else if ($user->level == 'super_user') {
-            return redirect('dashboard');
         }
     }
 
@@ -117,9 +116,11 @@ class AuthController extends Controller
 
 
         if ($insert_peserta) {
-            return redirect()->route('dashboard-home-frontend')->with('success', 'Berhasil menambahkan data user');
+            Alert::success('Berhasil', 'Berhasil Membuat AKUN LOGIN PESERTA Silahkan untuk login terlebih dahulu');
+            return redirect()->route('dashboard-home-frontend');
         } else {
-            return redirect()->back()->with('error', 'Gagal menambahkan data user');
+            Alert::error('Gagal', 'Gagal Membuat AKUN LOGIN PESERTA');
+            return redirect()->back();
         }
     }
 

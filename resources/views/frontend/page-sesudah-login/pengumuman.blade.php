@@ -2,14 +2,14 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div style="font-size: 26px;"><b>ALUR PENDAFTARAN</b></div>
+            <div style="font-size: 26px;"><b>STATUS PENDAFTARAN</b></div>
             <div class="dropdown-divider" style="border: 3px solid rgba(0, 0, 0, 0.2);"></div>
             <br>
 
             <br>
 
             <table class="table">
-                <tr class="table-dark text-dark">
+                <tr class="table-dark text-dark ">
                     <th>No Pendaftaran</th>
                     <th>Nama Siswa</th>
                     <th>Tanggal Lahir</th>

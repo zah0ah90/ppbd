@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -17,7 +18,20 @@ class DashboardController extends Controller
     public function index()
     {
         // echo  Auth::user()->email;
-        return view('backend.dashboard.index');
+        $peserta = DB::table('tbl_peserta')->count('id');
+        $guru = DB::table('tbl_guru')->count('id');
+        $galleri_foto = DB::table('tbl_galleri_foto')->where('type', 'berita')->count('id');
+        $berita = DB::table('tbl_berita')->count('id');
+
+        // echo '<pre>';
+        // print_r($peserta);
+        // die();
+        return view('backend.dashboard.index', [
+            'peserta' => $peserta,
+            'guru' => $guru,
+            'galleri_foto' => $galleri_foto,
+            'berita' => $berita,
+        ]);
     }
 
     /**
