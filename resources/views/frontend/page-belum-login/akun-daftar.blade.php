@@ -14,7 +14,7 @@
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="namaanak"
+                    <input type="text" class="form-control" style="background:#C4C4C4;" value="{{ old('namaanak') }}" name="namaanak" 
                         placeholder="Nama Panggilan Anak">
                     @if($errors->has('namaanak'))
                     <small class="text-danger">{{ $errors->first('namaanak') }}</small>
@@ -29,7 +29,7 @@
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="username"
+                    <input type="text" class="form-control" style="background:#C4C4C4;" value="{{ old('username') }}" name="username"
                         placeholder="Username">
                     @if($errors->has('username'))
                     <small class="text-danger">{{ $errors->first('username') }}</small>
@@ -45,7 +45,7 @@
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="nama"
+                    <input type="text" class="form-control" style="background:#C4C4C4;" value="{{ old('nama') }}" name="nama"
                         placeholder="Nama Bapak Wali">
                     @if($errors->has('nama'))
                     <small class="text-danger">{{ $errors->first('nama') }}</small>
@@ -60,7 +60,7 @@
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" style="background:#C4C4C4;" name="email"
+                    <input type="text" class="form-control" style="background:#C4C4C4;" value="{{ old('email') }}" name="email"
                         placeholder="Email Wali">
                     @if($errors->has('email'))
                     <small class="text-danger">{{ $errors->first('email') }}</small>
@@ -75,7 +75,7 @@
                                 margin-left: 10px;"></i>
                 </div>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" style="background:#C4C4C4;" name="nomor_handphone"
+                    <input type="number" class="form-control" style="background:#C4C4C4;" value="{{ old('nomor_handphone') }}" name="nomor_handphone"
                         placeholder="Nomor Handphone">
                     @if($errors->has('nomor_handphone'))
                     <small class="text-danger">{{ $errors->first('nomor_handphone') }}</small>

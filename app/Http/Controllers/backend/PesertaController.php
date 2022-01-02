@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Peserta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PesertaController extends Controller
@@ -89,9 +90,11 @@ class PesertaController extends Controller
      */
     public function update(Request $request, Peserta $peserta)
     {
-        echo 'wkwkwk' . $peserta;
-        die();
-        $request->validate([]);
+        // echo 'wkwkwk' . $request->status;
+        // die();
+        $request->validate([
+            'status' => 'required',
+        ]);
 
         // $wali = Wali::find($id);
         // $wali->nis = $request->nis;
@@ -118,5 +121,16 @@ class PesertaController extends Controller
         // die();
         $peserta->delete();
         return redirect()->back()->with('success', 'Berhasil Menghapus!');
+    }
+
+
+    public function edit_isi_data_siswa()
+    {
+        $cek_login_wali = Auth::id();
+        $peserta = DB::table('tbl_peserta')->where('user_id', $cek_login_wali)->get();
+        // echo '<pre>';
+        // print_r($peserta);
+        // die();
+        return response()->json($peserta);
     }
 }

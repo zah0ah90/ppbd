@@ -106,6 +106,7 @@ class AuthController extends Controller
 
         $insert_peserta = DB::table('tbl_peserta')->insert([
             'wali_id' => $insert_wali,
+            'user_id' => $user->id,
             'no_pendaftaran' => '1',
             'status' => '2'
         ]);
@@ -116,7 +117,7 @@ class AuthController extends Controller
 
 
         if ($insert_peserta) {
-            return redirect()->route('/')->with('success', 'Berhasil menambahkan data user');
+            return redirect()->route('dashboard-home-frontend')->with('success', 'Berhasil menambahkan data user');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data user');
         }

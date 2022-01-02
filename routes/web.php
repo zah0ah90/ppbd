@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth']], function () {
         //     echo 'admin';
         // });
         Route::patch('peserta/{id}', 'PesertaController@update')->name('peserta-update');
+        Route::delete('peserta/{id}', 'PesertaController@destroy')->name('peserta-delete');
+
+
         Route::resource('peserta', PesertaController::class);
         Route::resource('pengumuman', PengumumanController::class);
         Route::resource('berita', BeritaController::class);
@@ -69,6 +72,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('wali', WaliController::class);
     });
     Route::group(['middleware' => ['cek_login:wali']], function () {
+
+        Route::get('editisidatasiswa', [PesertaController::class, 'edit_isi_data_siswa'])->name('edit-data-siswa');
         /*
     		Route Khusus untuk role editor
     	*/

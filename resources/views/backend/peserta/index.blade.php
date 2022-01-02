@@ -62,14 +62,14 @@
                                         
                                         <a class="btn btn-primary"
                                         href="{{ route('peserta.edit',$data->id) }}">Edit</a>
-                                        <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            <form action="{{ route('peserta.destroy',$data->id) }}" 
+                                        {{-- <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
+                                            <form action="{{ route('peserta-delete',$data->id) }}" 
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                             </form>
                                             Delete
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 </tr>
                                 @endforeach

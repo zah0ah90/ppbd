@@ -154,11 +154,15 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" class="form-control">
+                                            <option value="" >Pilih Status</option>
                                             <option value="1" {{ $peserta->status == '1' ? 'selected' : ''}}>Di Terima</option>
                                             <option value="0" {{ $peserta->status == '0' ? 'selected' : ''}}>Di Tolak</option>
                                             <option value="2" {{ $peserta->status == '2' ? 'selected' : ''}}>Di Proses</option>
                                           
                                         </select>
+                                        @if($errors->has('status'))
+                                        <small class="text-danger">{{ $errors->first('status') }}</small>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

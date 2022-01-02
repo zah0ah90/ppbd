@@ -20,6 +20,7 @@ class CreatePesertaTable extends Migration
 
 
             $table->unsignedBigInteger('wali_id');
+            $table->unsignedBigInteger('user_id');
 
 
             $table->string('no_pendaftaran', 100)->nullable();
@@ -51,6 +52,7 @@ class CreatePesertaTable extends Migration
 
 
             $table->foreign('wali_id')->references('id')->on('tbl_wali');
+            $table->foreign('user_id')->references('id')->on('users');
 
 
 
