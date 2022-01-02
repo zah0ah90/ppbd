@@ -20,18 +20,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{route('dashboard-wali')}}">Home</a>
+                    <a class="nav-link" href="{{ route('dashboard-wali') }}">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('persyaratan_wali')}}">Persyaratan</a>
+                    <a class="nav-link" href="{{ route('persyaratan_wali') }}">Persyaratan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('pengumuman_wali')}}">Pengumuman</a>
+                    <a class="nav-link" href="{{ route('pengumuman-status-siswa') }}">Pengumuman</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('edit_profile_wali')}}">Edit Profile</a>
+                    <a class="nav-link" href="{{ route('edit_profile_wali') }}">Edit Profile</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -41,9 +41,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         {{-- <a class="dropdown-item" href="#">Profile Ku</a> --}}
-                        <a class="dropdown-item" href="{{route('profile_peserta')}}">Profile Ku</a>
+                        <a class="dropdown-item" href="{{ route('profile_peserta') }}">Profile Ku</a>
                         <div class="dropdown-divider"></div>
-                        <a href="{{route('logout')}}" class="dropdown-item dropdown-footer">Logout</a>
+                        <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer">Logout</a>
                     </div>
                 </li>
             </ul>

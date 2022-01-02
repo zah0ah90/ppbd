@@ -1,38 +1,48 @@
 @extends('frontend.page-sesudah-login.layouts.app')
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div style="font-size: 26px;"><b>ALUR PENDAFTARAN</b></div>
-        <div class="dropdown-divider" style="border: 3px solid rgba(0, 0, 0, 0.2);"></div>
-        <br>
+    <div class="row">
+        <div class="col-12">
+            <div style="font-size: 26px;"><b>ALUR PENDAFTARAN</b></div>
+            <div class="dropdown-divider" style="border: 3px solid rgba(0, 0, 0, 0.2);"></div>
+            <br>
 
-        <br>
+            <br>
 
-        <table class="table">
-            <tr class="table-dark text-dark">
-                <th>Nama Siswa</th>
-                <th>Tanggal Lahir</th>
-                <th>Jenis Kelamin</th>
-                <th>Tanggal Daftar</th>
-                <th>Nama Orang Tua/Wali</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-            <tr class="table-secondary text-dark">
-                <td>Andri Agustina</td>
-                <td>00-00-0000</td>
-                <td>Laki - Laki</td>
-                <td>00-00-0000</td>
-                <td>Asdfffwkwkwk</td>
-                <td class="text-success">Diterima</td>
-                <td><button class="btn btn-primary text-dark button-tambahan-shadow">Lihat
-                        Detail</button>
-                </td>
+            <table class="table">
+                <tr class="table-dark text-dark">
+                    <th>No Pendaftaran</th>
+                    <th>Nama Siswa</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Tanggal Daftar</th>
+                    <th>Nama Orang Tua/Wali</th>
+                    <th>Status</th>
 
-            </tr>
-        </table>
+                </tr>
+                <tr class="table-secondary text-dark">
+                    @if ($peserta)
+                        @php($index = 1)
+                        @foreach ($peserta as $data)
+                <tr>
 
+                    <td>{{ $data->no_pendaftaran }}</td>
+                    <td>{{ $data->nama_lengkap_siswa }}</td>
+                    <td>{{ $data->tanggal_lahir }}</td>
+                    <td>{{ $data->jenis_kelamin }}</td>
+                    <td>{{ $data->tanggal_daftar }}</td>
+                    <td>{{ $data->nama_ayah_kandung }} | {{ $data->nama_ibu_kandung }}</td>
+                    <td><b> {{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : 'Di Proses') }}</b></td>
+                </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td align="center" colspan="5">Data tidak tersedia</td>
+                </tr>
+                @endif
+                </tr>
+            </table>
+
+        </div>
     </div>
-</div>
 
 @endsection
