@@ -28,7 +28,7 @@ class AkunSeeder extends Seeder
                 'nama' => 'maudi',
                 'nomor_handphone' => '08577777777',
                 'email' => 'user@example.com',
-                'level' => 'editor',
+                'level' => 'wali',
                 'password' => bcrypt('123456'),
             ],
             [
