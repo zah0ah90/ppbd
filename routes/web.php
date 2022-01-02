@@ -46,6 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('peserta/{id}', 'PesertaController@destroy')->name('peserta-delete');
 
 
+        Route::get('user-akun-view', [AuthController::class, 'user_akun_view'])->name('user-akun-view');
+        Route::get('edit-akun-view/{id}', [AuthController::class, 'edit_akun_view'])->name('edit-akun-view');
+
+
         Route::resource('peserta', PesertaController::class);
         Route::resource('pengumuman', PengumumanController::class);
         Route::resource('berita', BeritaController::class);
@@ -53,7 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('galleri_foto', GalleriFotoController::class);
         Route::resource('guru', GuruController::class);
         Route::resource('dashboard', DashboardController::class);
-
         Route::resource('wali', WaliController::class);
     });
 

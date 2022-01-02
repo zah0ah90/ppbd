@@ -134,4 +134,19 @@ class AuthController extends Controller
             'nomor_handphone' => $data['nomor_handphone'],
         ]);
     }
+
+    public function user_akun_view()
+    {
+        $user = User::paginate(10);
+        // $guru = Guru::paginate(10);
+        return view('backend.user.index', ['user' => $user]);
+    }
+
+    public function edit_akun_view($id)
+    {
+        // $user = DB::table('users')->where('id', $id)->get();
+        // $guru = Guru::paginate(10);
+        $user   = User::where(['id' => $id])->first();
+        return view('backend.user.edit', ['user' => $user]);
+    }
 }

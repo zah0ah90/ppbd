@@ -107,6 +107,15 @@
                     </ul>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{route('user-akun-view')}}" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            User
+                        </p>
+                    </a>
+                </li>
+
 
             </ul>
         </nav>
