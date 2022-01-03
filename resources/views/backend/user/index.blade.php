@@ -56,13 +56,17 @@
                                         <a href="{{ route('edit-akun-view',$data->id) }}"
                                             class="btn btn-primary">Edit</a>
                                         <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            {{-- <form action="{{ route('user.destroy',$data->id) }}"
+                                            <form action="{{ route('delete-akun-user',$data->id) }}"
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                            </form> --}}
+                                            </form>
                                             Delete
                                         </a>
+
+
+
+
                                     </td>
                                 </tr>
                                 @endforeach

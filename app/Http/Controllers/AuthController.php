@@ -41,21 +41,37 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        $cekAkun = DB::table('users')
+            ->where('username', '=', "$request->username")
+            ->where('deleted_at', '=', null)
+            ->first();
+        // echo '<pre>';
+        // print_r($cekAkun);
 
-        $credentials = $request->only('username', 'password');
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            if ($user->level == 'admin') {
-                Alert::success('Berhasil', 'Berhasil Login Admin');
-                return redirect('dashboard');
-                // ->intended('admin');
-            } else if ($user->level == 'wali') {
-                Alert::success('Berhasil', 'Berhasil Login Wali Peserta');
-                return redirect('dashboard-wali');
+
+
+        if ($cekAkun) {
+            // echo 'aktif';
+            $credentials = $request->only('username', 'password');
+            if (Auth::attempt($credentials)) {
+                $user = Auth::user();
+                if ($user->level == 'admin') {
+                    Alert::success('Berhasil', 'Berhasil Login Admin');
+                    return redirect('dashboard');
+                    // ->intended('admin');
+                } else if ($user->level == 'wali') {
+                    Alert::success('Berhasil', 'Berhasil Login Wali Peserta');
+                    return redirect('dashboard-wali');
+                }
+                // return redirect('/');
             }
-            // return redirect('/');
+            // echo 'aktif';
+
+        } else {
+            // echo 'tidak aktif';
+            Alert::error('Gagal Login', 'Username anda tidak aktif Harap hubungi admin');
+            return redirect('login');
         }
-        return redirect('login')->withSuccess('Oppes! Silahkan Cek Inputanmu');
     }
     public function logout(Request $request)
     {
@@ -110,11 +126,6 @@ class AuthController extends Controller
             'status' => '2'
         ]);
 
-
-
-
-
-
         if ($insert_peserta) {
             Alert::success('Berhasil', 'Berhasil Membuat AKUN LOGIN PESERTA Silahkan untuk login terlebih dahulu');
             return redirect()->route('dashboard-home-frontend');
@@ -148,5 +159,36 @@ class AuthController extends Controller
         // $guru = Guru::paginate(10);
         $user   = User::where(['id' => $id])->first();
         return view('backend.user.edit', ['user' => $user]);
+    }
+
+    public function delete_akun_user($id)
+    {
+        $user = User::find($id);
+        // print_r($user);
+        // die();
+
+        $user->delete();
+        return redirect()->back()->with('success', 'Berhasil Menghapus!');
+    }
+
+    public function edit_akun_update(Request $request)
+    {
+        $request->validate([
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
+        ]);
+
+        $update =  DB::table('users')->where('id', $request->id)->update([
+            'password' => Hash::make($request->password),
+            'level' => $request->status
+        ]);
+
+        if ($update) {
+            Alert::success('Berhasil', 'Berhasil update User');
+            return redirect()->route('user-akun-view');
+        } else {
+            Alert::error('Gagal', 'Gagal update User');
+            return redirect()->back();
+        }
     }
 }

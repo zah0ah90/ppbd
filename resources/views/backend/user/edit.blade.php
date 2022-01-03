@@ -32,30 +32,29 @@
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body table-responsive ">
-                        {{-- <form action="{{ route('user.update',$user->id) }}" method="POST"> --}}
-                            {{-- @csrf --}}
-                            {{-- @method('PUT') --}}
-
-
+                        <form action="{{ route('update-akun-user') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$user->id}}">
                             <div class="form-group">
                                 <label>Username</label>
                                 <input type="text" class="form-control" name="username" id="username"
-                                    value="{{$user->username}}">
+                                    value="{{$user->username}}" disabled>
                                 @if($errors->has('username'))
                                 <small class="text-danger">{{ $errors->first('username') }}</small>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" class="form-control" name="email" id="email"
-                                    value="{{$user->email}}">
+                                <input type="text" class="form-control" name="email" id="email" value="{{$user->email}}"
+                                    disabled>
                                 @if($errors->has('email'))
                                 <small class="text-danger">{{ $errors->first('email') }}</small>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label>Nama</label>
-                                <input type="text" class="form-control" name="nama" id="nama" value="{{$user->nama}}">
+                                <input type="text" class="form-control" name="nama" id="nama" value="{{$user->nama}}"
+                                    disabled>
                                 @if($errors->has('nama'))
                                 <small class="text-danger">{{ $errors->first('nama') }}</small>
                                 @endif
@@ -63,10 +62,20 @@
                             <div class="form-group">
                                 <label>Nomor Handphone</label>
                                 <input type="number" class="form-control" name="nomor_handphone" id="nomor_handphone"
-                                    value="{{$user->nomor_handphone}}">
+                                    disabled value="{{$user->nomor_handphone}}">
                                 @if($errors->has('nomor_handphone'))
                                 <small class="text-danger">{{ $errors->first('nomor_handphone') }}</small>
                                 @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <select name="jenis_kelamin" class="form-control">
+                                    <option value="admin" {{ $user->level == 'admin' ? 'selected' : ''}}>Admin</option>
+                                    <option value="wali" {{ $user->level == 'wali' ? 'selected' : ''}}>
+                                        Wali
+                                    </option>
+                                </select>
                             </div>
 
                             <div class=" form-group">
@@ -89,13 +98,10 @@
                                 @endif
                             </div>
 
+
                             <a href="{{ route('user-akun-view') }}" class="btn btn-danger">Kembali</a>
                             <button type="submit" class="btn btn-primary">Update Data</button>
                     </div>
-
-
-
-
                     </form>
                 </div>
                 <!-- /.card-body -->

@@ -48,7 +48,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('user-akun-view', [AuthController::class, 'user_akun_view'])->name('user-akun-view');
         Route::get('edit-akun-view/{id}', [AuthController::class, 'edit_akun_view'])->name('edit-akun-view');
-
+        Route::delete('delete-akun-user/{id}', [AuthController::class, 'delete_akun_user'])->name('delete-akun-user');
+        Route::post('update-akun-user', [AuthController::class, 'edit_akun_update'])->name('update-akun-user');
 
         Route::resource('peserta', PesertaController::class);
         Route::resource('pengumuman', PengumumanController::class);

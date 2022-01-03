@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    
+
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap table-bordered">
@@ -58,16 +58,15 @@
                                     <td>{{ $data->nomor_kk }}</td>
                                     <td>{{ $data->nama_anak }}</td>
                                     <td>
-                                        <a class="btn btn-primary"
-                                        href="{{ route('wali.edit',$data->id) }}">Edit</a>
-                                        <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            <form action="{{ route('wali.destroy',$data->id) }}" 
+                                        <a class="btn btn-primary" href="{{ route('wali.edit',$data->id) }}">Edit</a>
+                                        {{-- <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
+                                            <form action="{{ route('wali.destroy',$data->id) }}"
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                             </form>
                                             Delete
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -96,8 +95,8 @@
 
 
 @push('page-script')
-    <script>
-        $(".swal-confirm").click(function(e) {
+<script>
+    $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
                     title: 'Apakah anda yakin?',
@@ -118,5 +117,5 @@
                 });
         });
 
-    </script>
+</script>
 @endpush
