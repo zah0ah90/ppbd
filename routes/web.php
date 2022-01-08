@@ -28,6 +28,7 @@ Route::get('/visi_misi', [HomeController::class, 'visi_misi'])->name('visi_misi-
 
 
 
+
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
 
@@ -59,6 +60,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('guru', GuruController::class);
         Route::resource('dashboard', DashboardController::class);
         Route::resource('wali', WaliController::class);
+
+        Route::get('/print-peserta-semua', [PesertaController::class, 'print_peserta_semua'])->name('print-peserta-semua');
+        Route::get('/print-peserta-satu/{id}', [PesertaController::class, 'print_peserta_satu'])->name('print-peserta-satu');
     });
 
     // ROUTE UNTUK WALI

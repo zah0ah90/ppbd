@@ -26,7 +26,7 @@ class CreatePesertaTable extends Migration
             $table->string('no_pendaftaran', 100)->nullable();
             $table->date('tanggal_daftar')->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->string('jenis_kelamin', 10)->nullable();
+            $table->string('jenis_kelamin', 20)->nullable();
             $table->string('status', 10)->nullable();
             $table->string('nama_lengkap_siswa', 100)->nullable();
             $table->string('nama_panggilan', 100)->nullable();
@@ -40,7 +40,7 @@ class CreatePesertaTable extends Migration
             $table->string('berat_badan', 10)->nullable();
             $table->string('tinggi_badan', 10)->nullable();
             $table->string('golongan_darah', 10)->nullable();
-            $table->string('riwayat_penyakit', 10)->nullable();
+            $table->string('riwayat_penyakit', 200)->nullable();
 
             $table->text('alamat')->nullable();
             $table->text('bertempat_tinggal_bersama')->nullable();
@@ -48,6 +48,7 @@ class CreatePesertaTable extends Migration
             $table->string('foto_akta_lahir')->nullable();
             $table->string('foto_kartu_keluarga')->nullable();
             $table->string('foto_surat_pernyataan')->nullable();
+            $table->string('foto_siswa')->nullable();
 
 
 

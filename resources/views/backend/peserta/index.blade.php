@@ -25,7 +25,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                  
+                    <div class="card-header">
+                        <a href="{{ route('print-peserta-semua')}}" class="btn btn-success">Cetak Semua <i
+                                class="fas fa-print"></i></a>
+                    </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -59,11 +62,14 @@
                                     {{-- $res = ( $rule1 ? true : ( $rule2 ? true : false ) ) --}}
                                     <td>{{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : 'Di Proses') }}</td>
                                     <td>
-                                        
-                                        <a class="btn btn-primary"
-                                        href="{{ route('peserta.edit',$data->id) }}">Edit</a>
+
+                                        <a class="btn btn-primary" href="{{ route('peserta.edit',$data->id) }}">Edit <i
+                                                class="far fa-edit"></i></a>
+                                        <a class="btn btn-success"
+                                            href="{{ route('print-peserta-satu',$data->id) }}">Cetak
+                                            <i class="fas fa-print"></i></a>
                                         {{-- <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            <form action="{{ route('peserta-delete',$data->id) }}" 
+                                            <form action="{{ route('peserta-delete',$data->id) }}"
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
@@ -98,8 +104,8 @@
 
 
 @push('page-script')
-    <script>
-        $(".swal-confirm").click(function(e) {
+<script>
+    $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
                     title: 'Apakah anda yakin?',
@@ -120,5 +126,5 @@
                 });
         });
 
-    </script>
+</script>
 @endpush

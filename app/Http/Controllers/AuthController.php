@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peserta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -111,6 +112,18 @@ class AuthController extends Controller
         $user = $this->create($data);
         $user->save();
 
+        // Get the last order id
+        $lastorderId = Peserta::orderBy('no_pendaftaran', 'desc')->first()->no_pendaftaran ?? 0;
+
+        // Get last 3 digits of last order id
+        $lastIncreament = substr($lastorderId, -3);
+
+        // Make a new order id with appending last increment + 1
+        $numberAuto =  date('Ymd') . str_pad($lastIncreament + 1, 3, 0, STR_PAD_LEFT);
+
+        // print_r($newOrderId);
+
+
         $insert_wali = DB::table('tbl_wali')->insertGetId(
             [
                 'nama_ayah_kandung' => $request->nama,
@@ -122,7 +135,7 @@ class AuthController extends Controller
         $insert_peserta = DB::table('tbl_peserta')->insert([
             'wali_id' => $insert_wali,
             'user_id' => $user->id,
-            'no_pendaftaran' => '1',
+            'no_pendaftaran' => $numberAuto,
             'status' => '2'
         ]);
 

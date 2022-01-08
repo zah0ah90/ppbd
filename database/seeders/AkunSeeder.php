@@ -31,14 +31,6 @@ class AkunSeeder extends Seeder
                 'level' => 'wali',
                 'password' => bcrypt('123456'),
             ],
-            [
-                'username' => 'super_user',
-                'nama' => 'super',
-                'nomor_handphone' => '08577777777',
-                'email' => 'super@example.com',
-                'level' => 'super',
-                'password' => bcrypt('123456'),
-            ],
         ];
 
         foreach ($user as $key => $value) {

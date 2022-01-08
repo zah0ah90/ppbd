@@ -21,6 +21,17 @@ class PesertaController extends Controller
      */
     public function index()
     {
+        // // Get the last order id
+        // $lastorderId = Peserta::orderBy('no_pendaftaran', 'desc')->first()->no_pendaftaran ?? 0;
+
+        // // Get last 3 digits of last order id
+        // $lastIncreament = substr($lastorderId, -3);
+
+        // // Make a new order id with appending last increment + 1
+        // $numberAuto =  date('Ymd') . str_pad($lastIncreament + 1, 3, 0, STR_PAD_LEFT);
+
+        // // print_r($newOrderId);
+
         $peserta = DB::select(
             "SELECT a.no_pendaftaran, a.nama_lengkap_siswa, a.nama_panggilan, a.jenis_kelamin, a.agama, a.status,
             a.wali_id, a.id, b.nama_ibu_kandung, b.nama_ayah_kandung
@@ -147,9 +158,11 @@ class PesertaController extends Controller
         // // print_r($request);
         // echo 'yaa udah wkwkkw';
         // die();
+
         $cek_login_wali = Auth::id();
         $update_tbl_peserta =  DB::table('tbl_peserta')->where('user_id', $cek_login_wali)->update([
             'tanggal_daftar' => $request->tanggal_daftar,
+            'riwayat_penyakit' => $request->riwayat_penyakit,
             'nama_lengkap_siswa' => $request->nama_lengkap_siswa,
             'nama_panggilan' => $request->nama_panggilan,
             'tanggal_lahir' => $request->tanggal_lahir,
@@ -280,5 +293,33 @@ class PesertaController extends Controller
             Alert::error('Gagal', 'Gagal Meng Ubah Password');
             return redirect()->back();
         }
+    }
+
+    public function print_peserta_semua()
+    {
+        $peserta = DB::table('tbl_peserta')
+            ->select('tbl_peserta.no_pendaftaran', 'tbl_peserta.status', 'tbl_peserta.deleted_at', 'tbl_peserta.nama_lengkap_siswa', 'tbl_wali.nama_ibu_kandung', 'tbl_wali.nama_ayah_kandung', 'tbl_wali.nomor_handphone_ibu', 'tbl_wali.nomor_handphone_ayah', 'tbl_wali.alamat')
+            ->leftJoin('tbl_wali', 'tbl_peserta.wali_id', '=', 'tbl_wali.id')
+            ->where('tbl_peserta.deleted_at', '=', null)
+            ->where('tbl_peserta.status', '=', '1')
+            ->get();
+        // echo '<pre>';
+        // print_r($peserta);
+        // die();
+        return view('print.print-peserta-semua', ['peserta' => $peserta]);
+    }
+
+    public function print_peserta_satu($id)
+    {
+        $peserta = DB::table('tbl_peserta')
+            ->select('tbl_peserta.no_pendaftaran', 'tbl_peserta.id', 'tbl_peserta.status', 'tbl_peserta.tanggal_lahir', 'tbl_peserta.anak_ke', 'tbl_peserta.berat_badan', 'tbl_peserta.agama', 'tbl_peserta.foto_siswa', 'tbl_peserta.tinggi_badan', 'tbl_peserta.riwayat_penyakit', 'tbl_peserta.kewarganegaraan', 'tbl_peserta.golongan_darah', 'tbl_peserta.bahasa', 'tbl_peserta.deleted_at', 'tbl_peserta.nama_lengkap_siswa', 'tbl_wali.nama_ibu_kandung', 'tbl_wali.nama_ayah_kandung', 'tbl_wali.nomor_handphone_ibu', 'tbl_wali.nomor_handphone_ayah', 'tbl_wali.alamat')
+            ->leftJoin('tbl_wali', 'tbl_peserta.wali_id', '=', 'tbl_wali.id')
+            ->where('tbl_peserta.deleted_at', '=', null)
+            ->where('tbl_peserta.id', '=', $id)
+            ->first();
+        // echo '<pre>';
+        // print_r($peserta);
+        // die();
+        return view('print.print-peserta-satu', ['peserta' => $peserta]);
     }
 }
