@@ -6,19 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Peserta;
 use App\Models\Wali;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\DiTerimaEmail;
+use App\Mail\DiTolakEmail;
+use App\Mail\DiKonfirmasiEmail;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PesertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         // // Get the last order id
@@ -52,70 +55,82 @@ class PesertaController extends Controller
         return view('backend.peserta.index', ['peserta' => $peserta]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Peserta  $peserta
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Peserta $peserta)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Peserta  $peserta
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $peserta = Peserta::findOrFail($id);
         return view('backend.peserta.edit', ['peserta' =>  $peserta]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Peserta  $peserta
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Peserta $peserta)
+    public function update(Request $request, $id)
     {
-        // echo 'wkwkwk' . $request->status;
+        $ngambilEmailWali = DB::table('users')->select('email', 'nomor_handphone', 'id')->where('id', '=', $request->user_id)->first();
+        // // print_r($ngambilEmailWali);
+        // // echo   '<br>' . $request->status . '<br>' .  '<br>' . $request->nama_lengkap_siswa;
+
         // die();
         $request->validate([
             'status' => 'required',
         ]);
 
+        $status = $request->status;
+        $nama_lengkap = $request->nama_lengkap_siswa;
+        $email = $ngambilEmailWali->email;
+        $nomor_handphone = $ngambilEmailWali->nomor_handphone;
+
         // $wali = Wali::find($id);
         // $wali->nis = $request->nis;
         // $wali->nama = $request->nama;
 
-        $peserta->update($request->all());
+        // $peserta->update($request->all());
+
+        // $peserta = DB::table('tbl_peserta')->where('id', $id)->update(['status' => $status]);
+
+        $responseStatus = '';
+
+        $data = [
+            'nama_lengkap' => $nama_lengkap,
+            'status' => $status,
+            'nomor_handphone' => $nomor_handphone
+        ];
+
+        $this->store_whatsapp($data);
+
+        die();
+
+        // function saveBogor() {
+        //     var id = $('#custnama').val();
+        //     if (id == '') {
+        //         alert('isi nama konsumen');
+        //     } else {
+        //         window.open(
+        //             url + "welcome/saveBogor/" + id,
+        //             "_blank", 'toolbar=yes, location=yes, status=yes, menubar=yes, scrollbars=yes'
+        //         );
+        //         window.focus();
+        //         location.reload();
+        //     }
+        // }
+
+
+
+        print_r($status);
+        if ($status == 0) {
+            $responseStatus = new DiTolakEmail($data);
+            echo '<script> alert("0") </script>';
+        } else if ($status == 1) {
+            $responseStatus = new DiTerimaEmail($data);
+            echo '<script> alert("1") </script>';
+        } else if ($status == 3) {
+            echo '<script> alert("3") </script>';
+            $responseStatus = new DiKonfirmasiEmail($data);
+        }
+
+        die();
+
+        if ($responseStatus) {
+            Mail::to($email)->send($responseStatus);
+        }
+
 
         if ($peserta) {
             return redirect()->route('peserta.index')->with('success', 'Berhasil memperbarui data peserta');
@@ -124,12 +139,6 @@ class PesertaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Peserta  $peserta
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Peserta $peserta)
     {
         // echo 'wkwkwkw';
@@ -321,5 +330,68 @@ class PesertaController extends Controller
         // print_r($peserta);
         // die();
         return view('print.print-peserta-satu', ['peserta' => $peserta]);
+    }
+
+    public function konfirmasi_email()
+    {
+        // $peserta = DB::table('tbl_peserta')
+        return view('email.konfirmasi.konfirmasi');
+        // $to_email = "zah0ah@gmail.com";
+
+        // $sendMail = Mail::to($to_email)->send(new SendMail);
+
+        // print_r($sendMail);
+        // die();
+        // return "<p> Success! Your E-mail has been sent.</p>";
+    }
+
+    public function store_whatsapp($data)
+    {
+        // print_r($data);
+        // die();
+        // return view('backend.peserta.whatsapp', $data);
+        $nomor_whatsapp = substr($data['nomor_handphone'],  1);
+        $status = $data['status'];
+        // echo $nomor_whatsapp;
+        // die();
+        echo '
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        Mohon menunggu ini akan redrict ke whatsapp <br>
+        <a href="' . route('peserta.index') . '">Kembali</a>
+        ';
+
+        // 1 di terima
+        // 0 Di Tolak
+        // 3 Menuggu konfirmasi
+        if ($status == 3) {
+            echo '
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat%20kepada%20para%20peserta%20siswa/siswa%20' . $data['nama_lengkap'] . '%20telah%20terpilih%20untuk%20menjadi%20calon%20siswa/siswi%20untuk%20melengkapi%20langkah%20selanjut%20nya,%20dengan%20mentransfer%20sejumlah%20xxx%20ke%20Rekening%20BCA%20xxx%20a/n%20Andri%20Agustina%20dan%20kirimkan%20bukti%20transfer%20ke%20nomor%20ini%20Terimakasih</textarea>
+            <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
+            ';
+        } else if ($status == 0) {
+            echo '
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Mohon%20maaf%20siswa/siswi%20nama%20tidak%20dapat%20di%20proses%20lebih%20lanjut,%20terimakasih%20sudah%20mendaftar%20ppdb%20online%20SDN%20NURUL%20SALAM</textarea>
+            <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
+            ';
+        } else if ($status == 1) {
+        }
+
+        echo "
+        <script>
+        $(document).ready(function() {
+        var textarea = $('.textarea').val();
+        $('#click').attr('href', textarea)
+        $('#click').click(function() {
+            var red = window.open(textarea, '_blank');
+            red.location;
+            win.focus();
+        });
+        // set time out 5 sec
+        setTimeout(function() {
+            $('#click').trigger('click');
+            window.close();
+        });
+        });
+        </script>";
     }
 }
