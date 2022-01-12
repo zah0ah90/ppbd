@@ -47,11 +47,14 @@ class AuthController extends Controller
             ->where('deleted_at', '=', null)
             ->first();
         // echo '<pre>';
-        // print_r($cekAkun);
+        // print_r($cekAkun->username);
+        // die();
 
-
-
-        if ($cekAkun) {
+        if ($cekAkun == null) {
+            // echo 'tidak aktif';
+            Alert::error('Gagal Login', 'Terjadi Kesalahan');
+            return redirect('login');
+        } else  if ($cekAkun->username == $request->username) {
             // echo 'aktif';
             $credentials = $request->only('username', 'password');
             if (Auth::attempt($credentials)) {
@@ -67,11 +70,6 @@ class AuthController extends Controller
                 // return redirect('/');
             }
             // echo 'aktif';
-
-        } else {
-            // echo 'tidak aktif';
-            Alert::error('Gagal Login', 'Username anda tidak aktif Harap hubungi admin');
-            return redirect('login');
         }
     }
     public function logout(Request $request)

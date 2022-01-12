@@ -39,11 +39,12 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
+Route::get('konfirmasi-pembayaran-peserta', [PesertaController::class, 'konfirmasi_email'])->name('konfirmasi-pembayaran-peserta');
 
 // ROUTE UNTUK ADMIN
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cek_login:admin']], function () {
-        Route::patch('peserta/{id}', 'PesertaController@update')->name('peserta-update');
+        Route::post('peserta/{id}', 'PesertaController@update')->name('peserta-update');
         Route::delete('peserta/{id}', 'PesertaController@destroy')->name('peserta-delete');
 
 
@@ -86,5 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('edit-profile-wali', [PesertaController::class, 'edit_profile_wali'])->name('edit_profile_wali');
         Route::post('ubah-password', [PesertaController::class, 'ubah_password'])->name('ubah-password-wali');
+
+        Route::get('edit-foto-siswa', [PesertaController::class, 'edit_foto_siswa'])->name('edit-foto-siswa');
+        Route::post('update-foto-siswa', [PesertaController::class, 'update_foto_siswa'])->name('update-foto-siswa');
     });
 });
