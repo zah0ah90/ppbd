@@ -25,6 +25,6 @@ class DiTerimaEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('PPDB SDN NURUL SALAM SELAMAT ANDA DI TERIMA')->view('email.konfirmasi', ['data' => $this->data]);
+        return $this->subject('PPDB SDN NURUL SALAM SELAMAT ANDA DI TERIMA')->view('email.diterima', ['data' => $this->data]);
     }
 }

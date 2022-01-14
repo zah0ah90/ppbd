@@ -16,7 +16,7 @@
                with font-awesome or any other icon font library -->
 
                 <li class="nav-item">
-                    <a href="{{   route('dashboard.index')}}" class="nav-link">
+                    <a href="{{ route('dashboard.index') }}" class="nav-link">
                         <i class="fas fa-tachometer-alt nav-icon"></i>
                         <p>
                             Dashboard
@@ -25,7 +25,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('peserta.index')}}" class="nav-link">
+                    <a href="{{ route('peserta.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-graduate"></i>
                         <p>
                             Peserta
@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('wali.index')}}" class="nav-link">
+                    <a href="{{ route('wali.index') }}" class="nav-link">
                         {{-- <i class="fas fa-chalkboard-teacher nav-icon"></i> --}}
                         <i class="fas fa-male nav-icon"></i>
                         <p>
@@ -45,7 +45,7 @@
 
 
                 <li class="nav-item">
-                    <a href="{{route('guru.index')}}" class="nav-link">
+                    <a href="{{ route('guru.index') }}" class="nav-link">
                         <i class="fas fa-chalkboard-teacher nav-icon"></i>
                         <p>
                             Guru
@@ -63,13 +63,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('pengumuman.index')}}" class="nav-link ">
+                            <a href="{{ route('pengumuman.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Berita</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('pengumuman.index')}}" class="nav-link">
+                            <a href="{{ route('pengumuman.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengumuman</p>
                             </a>
@@ -87,7 +87,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link ">
+                            <a href="{{ route('galleri_foto.index') }}" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Galleri Foto</p>
                             </a>
@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('galleri_video.index')}}" class="nav-link">
+                            <a href="{{ route('galleri_video.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Galleri Video</p>
                             </a>
@@ -108,7 +108,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{route('user-akun-view')}}" class="nav-link">
+                    <a href="{{ route('user-akun-view') }}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
                             User

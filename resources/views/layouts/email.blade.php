@@ -8,10 +8,8 @@
                 <table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr>
-                            <td align="center" valign="top" {{--
-                                background="https://designmodo.com/demo/emailtemplate/images/header-background.jpg" --}}
-                                bgcolor="#66809b" style="background-size:cover; background-position:top;height="
-                                400""="">
+                            <td align="center" valign="top" {{-- background="https://designmodo.com/demo/emailtemplate/images/header-background.jpg" --}} bgcolor="#66809b"
+                                style="background-size:cover; background-position:top;" height=" 400">
                                 <table class="col-600" width="600" height="400" border="0" align="center"
                                     cellpadding="0" cellspacing="0">
 
@@ -75,9 +73,8 @@
                 <table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr>
-                            <td align="center" valign="top" {{--
-                                background="https://designmodo.com/demo/emailtemplate/images/header-background.jpg" --}}
-                                bgcolor="# " style="background-size:cover; background-position:top;height=" 400""="">
+                            <td align="center" valign="top" {{-- background="https://designmodo.com/demo/emailtemplate/images/header-background.jpg" --}} bgcolor="#66809b"
+                                style="background-size:cover; background-position:top;">
                                 <table class="col-600" width="600" height="100" border="0" align="center"
                                     cellpadding="0" cellspacing="0">
 

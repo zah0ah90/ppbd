@@ -31,7 +31,11 @@
                     <td>{{ $data->jenis_kelamin }}</td>
                     <td>{{ $data->tanggal_daftar }}</td>
                     <td>{{ $data->nama_ayah_kandung }} | {{ $data->nama_ibu_kandung }}</td>
-                    <td><b> {{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : 'Di Proses') }}</b></td>
+                    <td>
+                        <b>
+                            {{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : (3 ? 'Menunggu Konfirmasi Pembayaran' : 'Di Proses')) }}</b>
+                    </td>
+
                 </tr>
                 @endforeach
             @else

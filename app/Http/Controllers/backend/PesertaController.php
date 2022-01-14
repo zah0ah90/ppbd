@@ -83,7 +83,7 @@ class PesertaController extends Controller
 
         // $peserta->update($request->all());
 
-        // $peserta = DB::table('tbl_peserta')->where('id', $id)->update(['status' => $status]);
+        $peserta = DB::table('tbl_peserta')->where('id', $id)->update(['status' => $status]);
 
         $responseStatus = '';
 
@@ -95,41 +95,26 @@ class PesertaController extends Controller
 
         $this->store_whatsapp($data);
 
-        die();
-
-        // function saveBogor() {
-        //     var id = $('#custnama').val();
-        //     if (id == '') {
-        //         alert('isi nama konsumen');
-        //     } else {
-        //         window.open(
-        //             url + "welcome/saveBogor/" + id,
-        //             "_blank", 'toolbar=yes, location=yes, status=yes, menubar=yes, scrollbars=yes'
-        //         );
-        //         window.focus();
-        //         location.reload();
-        //     }
-        // }
+        // die();
 
 
-
-        print_r($status);
+        // print_r($status);
         if ($status == 0) {
             $responseStatus = new DiTolakEmail($data);
-            echo '<script> alert("0") </script>';
+            // echo '<script> alert("0") </script>';
         } else if ($status == 1) {
             $responseStatus = new DiTerimaEmail($data);
-            echo '<script> alert("1") </script>';
+            // echo '<script> alert("1") </script>';
         } else if ($status == 3) {
-            echo '<script> alert("3") </script>';
+            // echo '<script> alert("3") </script>';
             $responseStatus = new DiKonfirmasiEmail($data);
         }
 
-        die();
 
         if ($responseStatus) {
             Mail::to($email)->send($responseStatus);
         }
+        // die();
 
 
         if ($peserta) {
@@ -370,10 +355,14 @@ class PesertaController extends Controller
             ';
         } else if ($status == 0) {
             echo '
-            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Mohon%20maaf%20siswa/siswi%20nama%20tidak%20dapat%20di%20proses%20lebih%20lanjut,%20terimakasih%20sudah%20mendaftar%20ppdb%20online%20SDN%20NURUL%20SALAM</textarea>
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Mohon%20maaf%20siswa/siswi%20' . $data['nama_lengkap'] . '%20tidak%20dapat%20di%20proses%20lebih%20lanjut,%20terimakasih%20sudah%20mendaftar%20ppdb%20online%20SDN%20NURUL%20SALAM</textarea>
             <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
             ';
         } else if ($status == 1) {
+            echo '
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat%20kepada%20peserta%20siswa/siswi%20' . $data['nama_lengkap'] . '%20telah%20menjadi%20siswa/siswi,%20Terimakasih%20telah%20mendaftar%20di%20PPDB%20ONLINE%20SDN%20NURUL%20ALAM</textarea>
+            <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
+            ';
         }
 
         echo "

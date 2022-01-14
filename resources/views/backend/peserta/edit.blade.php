@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Nama Lengkap Siswa</label>
-                                            <input type="text" class="form-control" name="nama_lengkap_siswa"
+                                            <input type="text" class="form-control" readonly name="nama_lengkap_siswa"
                                                 id="nama_lengkap_siswa" value="{{ $peserta->nama_lengkap_siswa }}">
                                         </div>
                                         <div class="form-group">

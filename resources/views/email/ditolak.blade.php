@@ -6,7 +6,7 @@
 
     <tr>
         <td align="center" style="font-family: 'Raleway', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;">
-            Selamat anda terpilih untuk menjadi siswa <br> <b>SDN NEGERI NURUL SALAM</b></td>
+            Mohon maaf proses tidak dapat di lanjut oleh <br> <b>SDN NEGERI NURUL SALAM</b></td>
     </tr>
 
     <tr>
@@ -17,10 +17,8 @@
     <tr>
         <td align="center"
             style="font-family: 'Lato', sans-serif; font-size:14px; color:#2a3a4b; line-height:24px; font-weight: 300;">
-            Selamat kepada peserta siswa/siswi {{ $data['nama_lengkap'] }} telah menjadi siswa/siswi, Terimakasih telah
-            mendaftar di PPDB ONLINE
-            SDN NURUL ALAM<br>
-
+            Mohon maaf siswa/siswi {{ $data['nama_lengkap'] }} tidak dapat di proses lebih lanjut, terimakasih sudah
+            mendaftar ppdb online SDN NURUL SALAM
         </td>
     </tr>
 @endsection

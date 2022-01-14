@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GalleriFoto;
 use App\Models\Galleri_foto_detail;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class GalleriFotoController extends Controller
 {
@@ -43,35 +43,43 @@ class GalleriFotoController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $input = $request->all();
+        $insert_galleri_foto = DB::table('tbl_galleri_foto')->insertGetId([
+            'nama' => $request->nama,
+            'type' => 'Galeri Foto',
+            'created_at' => date('Y-m-d')
+        ]);
 
-        $gallerifoto = Gallerifoto::create($input);
-        $gallerifoto->save();
-
-        $files = [];
+        // $files = [];
         if ($request->hasfile('image')) {
             foreach ($request->file('image') as $data) {
                 $name = time() . rand(1, 50) . '.' . $data->extension();
                 $data->move(public_path('image'), $name);
-                $files[] = $name;
+                // $files[] = $name;
+                DB::table('tbl_galleri_foto_detail')->insert([
+                    'nama' => $name,
+                    'galleri_foto_id' => $insert_galleri_foto,
+                    'created_at' => date('Y-m-d')
+                ]);
             }
         }
+        // echo '<pre>';
+        // // print_r($files);
+        // print_r(implode("|", $files));
+        // die();
 
         // Galleri_foto_detail::insert()
-        $file = new Galleri_foto_detail();
-        $file->filenames = $files;
-        $file->galleri_foto_id = $gallerifoto->id;
-        $file->save();
+        // $file = new Galleri_foto_detail();
+        // $file->filenames = $files;
+        // $file->galleri_foto_id = $gallerifoto->id;
+        // $file->save();
 
 
 
-
-
-        if ($gallerifoto->save()) {
-            return redirect()->route('gallerifoto.index')->with('success', 'Berhasil menambahkan data galleri foto');
+        if ($insert_galleri_foto) {
+            return redirect()->route('galleri_foto.index')->with('success', 'Berhasil menambahkan data galleri foto');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data galleri foto');
         }

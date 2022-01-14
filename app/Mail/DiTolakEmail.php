@@ -25,6 +25,6 @@ class DiTolakEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('PPDB SDN NURUL SALAM MOHON MAAF ANDA BELUM DI TERIMA')->view('email.konfirmasi', ['data' => $this->data]);
+        return $this->subject('PPDB SDN NURUL SALAM MOHON MAAF PROSES ANDA TIDAK DAPAT DI LANJUT')->view('email.ditolak', ['data' => $this->data]);
     }
 }
