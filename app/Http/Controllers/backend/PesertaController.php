@@ -114,7 +114,7 @@ class PesertaController extends Controller
         if ($responseStatus) {
             Mail::to($email)->send($responseStatus);
         }
-        // die();
+        die();
 
 
         if ($peserta) {
