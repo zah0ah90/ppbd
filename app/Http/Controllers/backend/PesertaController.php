@@ -383,4 +383,79 @@ class PesertaController extends Controller
         });
         </script>";
     }
+
+    public function update_berkas_siswa(Request $request)
+    {
+        echo $request->file;
+        die();
+        $cek_login_wali = Auth::id();
+        // $peserta = DB::table('tbl_peserta')->where('user_id', $cek_login_wali)->get();
+
+        // print_r($request->all());
+        // print_r($request->method());
+        // $input = [];
+
+        // if ($image = $request->file('foto_siswa')) {
+        //     $destinationPath = 'backend/image/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['foto_siswa'] = "$profileImage";
+        // } else {
+        //     unset($input['foto_siswa']);
+        // }
+
+        // if ($image = $request->file('foto_akta_lahir')) {
+        //     $destinationPath = 'backend/image/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['foto_akta_lahir'] = "$profileImage";
+        // } else {
+        //     unset($input['foto_akta_lahir']);
+        // }
+        // if ($image = $request->file('foto_kartu_keluarga')) {
+        //     $destinationPath = 'backend/image/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['foto_kartu_keluarga'] = "$profileImage";
+        // } else {
+        //     unset($input['foto_kartu_keluarga']);
+        // }
+        // if ($image = $request->file('foto_surat_pernyataan')) {
+        //     $destinationPath = 'backend/image/';
+        //     $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['foto_surat_pernyataan'] = "$profileImage";
+        // } else {
+        //     unset($input['foto_surat_pernyataan']);
+        // }
+
+        // var_dump($input);
+        // die();
+
+
+        if ($request->file != '') {
+            $path = public_path() . '/uploads/images/';
+
+            //upload new file
+            $file = $request->file;
+            $filename = $file->getClientOriginalName();
+            $file->move($path, $filename);
+
+            //for update in table
+            // $employee->update(['file' => $filename]);
+        }
+
+        $update_tbl_peserta =  DB::table('tbl_peserta')->where('user_id', $cek_login_wali)->update([
+            'foto_akta_lahir' => $input['foto_akta_lahir'],
+            'foto_kartu_keluarga' => $input['foto_kartu_keluarga'],
+            'foto_surat_pernyataan' => $input['foto_surat_pernyataan'],
+            'foto_siswa' => $input['foto_siswa'],
+        ]);
+
+        if ($update_tbl_peserta) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
 }

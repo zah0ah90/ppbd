@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,7 +17,7 @@ class GuruController extends Controller
     {
         $guru = Guru::paginate(10);
         // $user = User::where('person_id', '=', 1);
-        
+
         return view('backend.guru.index', ['guru' => $guru]);
     }
 
@@ -38,7 +38,7 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $request->validate([
             'nama' => 'required',
             'jenis_kelamin' => 'required',
@@ -58,7 +58,7 @@ class GuruController extends Controller
 
         $guru = Guru::create($input);
 
-        if($guru->save()) {
+        if ($guru->save()) {
             return redirect()->route('guru.index')->with('success', 'Berhasil menambahkan data guru');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data guru');
@@ -84,7 +84,7 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        return view('backend.guru.edit',compact('guru'));
+        return view('backend.guru.edit', compact('guru'));
     }
 
     /**
@@ -107,18 +107,17 @@ class GuruController extends Controller
 
         $input = $request->all();
         if ($image = $request->file('image')) {
-
             $destinationPath = 'backend/image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
-        }else{
+        } else {
             unset($input['image']);
         }
 
         $guru->update($input);
 
-        if($guru) {
+        if ($guru) {
             return redirect()->route('guru.index')->with('success', 'Berhasil memperbarui data guru');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui data guru');

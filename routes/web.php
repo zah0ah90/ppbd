@@ -21,7 +21,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard-home-frontend
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak-frontend');
 Route::get('/pengumumans', [HomeController::class, 'pengumuman'])->name('pengumuman-frontend');
 Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah-frontend');
-Route::get('/tenaga_pendidik', [HomeController::class, 'tenaga_pendidik'])->name('tenaga_pendidik-frontend');
+Route::get('/tenaga-pendidik', [HomeController::class, 'tenaga_pendidik'])->name('tenaga_pendidik-frontend');
 Route::get('/gallerifoto', [HomeController::class, 'gallerifoto'])->name('gallerifoto-frontend');
 Route::get('/gallerivideo', [HomeController::class, 'gallerivideo'])->name('gallerivideo-frontend');
 Route::get('/visi_misi', [HomeController::class, 'visi_misi'])->name('visi_misi-frontend');
@@ -90,5 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('edit-foto-siswa', [PesertaController::class, 'edit_foto_siswa'])->name('edit-foto-siswa');
         Route::post('update-foto-siswa', [PesertaController::class, 'update_foto_siswa'])->name('update-foto-siswa');
+
+        Route::post('update-berkas-siswa', [PesertaController::class, 'update_berkas_siswa'])->name('update-berkas-siswa');
     });
 });

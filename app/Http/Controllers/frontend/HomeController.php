@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,8 @@ class HomeController extends Controller
 
     public function tenaga_pendidik()
     {
-        return view('frontend.page-belum-login.tenaga-pendidik');
+        $table_guru = DB::table('tbl_guru')->where('deleted_at', '=', null)->get();
+        return view('frontend.page-belum-login.tenaga-pendidik', ['guru' => $table_guru]);
     }
 
     public function visi_misi()
