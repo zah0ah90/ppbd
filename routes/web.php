@@ -89,8 +89,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('ubah-password', [PesertaController::class, 'ubah_password'])->name('ubah-password-wali');
 
         Route::get('edit-foto-siswa', [PesertaController::class, 'edit_foto_siswa'])->name('edit-foto-siswa');
+
         Route::post('update-foto-siswa', [PesertaController::class, 'update_foto_siswa'])->name('update-foto-siswa');
 
         Route::post('update-berkas-siswa', [PesertaController::class, 'update_berkas_siswa'])->name('update-berkas-siswa');
+
+        Route::get('bukti-pendaftaran-siswa', [PesertaController::class, 'bukti_pendaftaran_siswa'])->name('bukti-pendaftaran-siswa');
     });
 });
