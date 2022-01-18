@@ -14,8 +14,8 @@
             <button class="btn  btn-info btn-block button-tambahan-shadow isi-data-wali    "><i class="fas fa-user-plus"></i>
                 Isi Data Orang Tua/
                 Wali</button>
-            <button class="btn  btn-primary btn-block button-tambahan-shadow text-light" data-toggle="modal"
-                data-target="#isi-data-dokumen"><i class="far fa-file"></i> Unggah Dokumen</button>
+            <button class="btn  btn-primary btn-block button-tambahan-shadow text-light" id="button-ungah-berkas"><i
+                    class="far fa-file"></i> Unggah Dokumen</button>
             <a href="{{ route('bukti-pendaftaran-siswa') }}" target="_blank"
                 class="btn btn-success btn-block button-tambahan-shadow text-light">
                 <i class="fas fa-print"></i>
@@ -325,25 +325,31 @@
                         @csrf
                         <div class="form-group">
                             <label><b>Foto Siswa</b></label>
-                            <input type="file" class="form-control-file" name="foto_siswa">
+                            <input type="file" class="form-control-file" name="foto_siswa" id="foto_siswa">
+                            <label for="" style="color: red" id="foto_siswa_label"></label>
                         </div>
                         <div class="form-group">
                             <label><b>Foto Akta Kelahiran Anak</b></label>
-                            <input type="file" class="form-control-file" name="foto_akta_lahir">
+                            <input type="file" class="form-control-file" name="foto_akta_lahir" id="foto_akta_lahir">
+                            <label for="" style="color: red" id="foto_akta_lahir_label"></label>
                         </div>
                         <div class="form-group">
                             <label><b>Foto Kartu Keluarga </b></label>
-                            <input type="file" class="form-control-file" name="foto_kartu_keluarga">
+                            <input type="file" class="form-control-file" name="foto_kartu_keluarga"
+                                id="foto_kartu_keluarga">
+                            <label for="" style="color: red" id="foto_kartu_keluarga_label"></label>
                         </div>
                         <div class="form-group">
                             <label><b>Foto Surat Pernyataan </b></label>
-                            <input type="file" class="form-control-file" name="foto_surat_pernyataan">
+                            <input type="file" class="form-control-file" name="foto_surat_pernyataan"
+                                id="foto_surat_pernyataan">
+                            <label for="" style="color: red" id="foto_surat_pernyataan_label"></label>
                         </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn  btn-primary">Save</button>
+                    <button type="submit" class="btn  btn-primary">Save</button>
                 </div>
                 </form>
             </div>
@@ -359,7 +365,7 @@
     <script src="{{ asset('backend/js/sweetalert.min.js') }}"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js
-                                                                                                                                                                                                                                                                        ">
+                                                                                                                                                                                                                                                                                                                                                                                                    ">
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -368,6 +374,89 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            $('body').on('click', '#button-ungah-berkas', function() {
+                $.get(`{{ route('edit-data-siswa') }}`, function(data) {
+                    $("#form-upload-berkas")[0].reset();
+                    $('#isi-data-dokumen').modal('show');
+                    if (data.foto_siswa != null) {
+                        $('#foto_siswa').attr('disabled', true);
+                        $('#foto_siswa_label').text(
+                            'harap hubungi admin untuk upload ulang terimakasih')
+                        $('#foto_siswa_label').attr('hidden', false);
+                    } else {
+                        $('#foto_siswa').attr('disabled', false);
+                        $('#foto_siswa_label').attr('hidden', true);
+                    }
+
+                    if (data.foto_akta_lahir != null) {
+                        $('#foto_akta_lahir').attr('disabled', true);
+                        $('#foto_akta_lahir_label').text(
+                            'harap hubungi admin untuk upload ulang terimakasih')
+                        $('#foto_akta_lahir_label').attr('hidden', false);
+                    } else {
+                        $('#foto_akta_lahir').attr('disabled', false);
+                        $('#foto_akta_lahir_label').attr('hidden', true);
+                    }
+
+                    if (data.foto_kartu_keluarga != null) {
+                        $('#foto_kartu_keluarga').attr('disabled', true);
+                        $('#foto_kartu_keluarga_label').text(
+                            'harap hubungi admin untuk upload ulang terimakasih')
+                        $('#foto_kartu_keluarga_label').attr('hidden', false);
+                    } else {
+                        $('#foto_kartu_keluarga').attr('disabled', false);
+                        $('#foto_kartu_keluarga_label').attr('hidden', true);
+                    }
+
+                    if (data.foto_surat_pernyataan != null) {
+                        $('#foto_surat_pernyataan').attr('disabled', true);
+                        $('#foto_surat_pernyataan_label').text(
+                            'harap hubungi admin untuk upload ulang terimakasih')
+                        $('#foto_surat_pernyataan_label').attr('hidden', false);
+                    } else {
+                        $('#foto_surat_pernyataan').attr('disabled', false);
+                        $('#foto_surat_pernyataan_label').attr('hidden', true);
+                    }
+                });
+            })
+
+
+            $('body').on('submit', '#form-upload-berkas', function(e) {
+                e.preventDefault();
+                // var actionType = $('#btn-save').val();
+                // $('#btn-save').html('Sending..');
+                var formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: `{{ route('update-berkas-siswa') }}`,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        if (data.success == true) {
+                            swal({
+                                icon: "success",
+                                title: 'upload',
+                            });
+                            location.reload();
+                        } else if (data.success == false) {
+                            swal({
+                                icon: "error",
+                                title: 'Terjadi Kesalahan harap hubungi admin',
+                            });
+                            location.reload();
+                        }
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                        $('#btn-save').html('Save Changes');
+                    }
+                });
+            });
+
+
 
             $('body').on('click', '.isi-data-siswa', function() {
                 // $('label').removeClass('error');

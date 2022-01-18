@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Peserta;
 use App\Models\Wali;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -386,16 +387,69 @@ class PesertaController extends Controller
 
     public function update_berkas_siswa(Request $request)
     {
-        echo $request->file;
-        die();
         $cek_login_wali = Auth::id();
+        // print_r($request->file);
+        // die();
+        // $pesertamodel = Peserta::find()
+        // $file = $request->file('avatar');
+        // $fileName = time() . '.' . $file->getClientOriginalExtension();
+        // $file->storeAs('public/images', $fileName);
+
+        if ($image = $request->file('foto_siswa')) {
+            $destinationPath = 'backend/image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['foto_siswa'] = "$profileImage";
+        }
+
+        if ($image = $request->file('foto_akta_lahir')) {
+            $destinationPath = 'backend/image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['foto_akta_lahir'] = "$profileImage";
+        }
+
+        if ($image = $request->file('foto_kartu_keluarga')) {
+            $destinationPath = 'backend/image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['foto_kartu_keluarga'] = "$profileImage";
+        }
+
+        if ($image = $request->file('foto_surat_pernyataan')) {
+            $destinationPath = 'backend/image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['foto_surat_pernyataan'] = "$profileImage";
+        }
+
+        // $foto_siswa = $request->file('foto_siswa');
+        // $foto_siswa_name = time() . '.' . $foto_siswa->getClientOriginalExtension();
+        // $foto_siswa->storeAs('backend/image', $foto_siswa_name);
+
+        // $foto_akta_lahir = $request->file('foto_akta_lahir');
+        // $foto_akta_lahir_name = time() . '.' . $foto_akta_lahir->getClientOriginalExtension();
+        // $foto_akta_lahir->storeAs('backend/image', $foto_akta_lahir_name);
 
 
-        // if ($update_tbl_peserta) {
-        //     return response()->json(['success' => true]);
-        // } else {
-        //     return response()->json(['success' => false]);
-        // }
+        // $foto_kartu_keluarga = $request->file('foto_kartu_keluarga');
+        // $foto_kartu_keluarga_name = time() . '.' . $foto_kartu_keluarga->getClientOriginalExtension();
+        // $foto_kartu_keluarga->storeAs('backend/image', $foto_kartu_keluarga_name);
+
+        // $foto_surat_pernyataan = $request->file('foto_surat_pernyataan');
+        // $foto_surat_pernyataan_name = time() . '.' . $foto_surat_pernyataan->getClientOriginalExtension();
+        // $foto_surat_pernyataan->storeAs('backend/image', $foto_surat_pernyataan_name);
+
+
+        $update_berkas =  DB::table('tbl_peserta')
+            ->where('user_id', $cek_login_wali)
+            ->update($input);
+
+        if ($update_berkas) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 
     public function bukti_pendaftaran_siswa()

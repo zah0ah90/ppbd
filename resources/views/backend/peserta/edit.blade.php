@@ -41,7 +41,7 @@
                                     <input type="text" class="form-control" disabled name="no_pendaftaran"
                                         id="no_pendaftaran" value="{{ $peserta->no_pendaftaran }}">
                                 </div>
-                                <div class="row">
+                                <div class="row my-gallery">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Tanggal Daftar</label>
@@ -86,7 +86,8 @@
                                         <div class="form-group">
                                             <label>Foto Kartu Keluarga </label>
                                             @if ($peserta->foto_kartu_keluarga)
-                                                <img src="{{ asset('frontend/peserta/' . $peserta->foto_kartu_keluarga) }}"
+                                                <br>
+                                                <img src="{{ asset('backend/image/' . $peserta->foto_kartu_keluarga) }}"
                                                     alt="" width="200">
                                             @else
                                                 <br>
@@ -97,7 +98,8 @@
                                         <div class="form-group">
                                             <label>Foto Surat Pernyataan </label>
                                             @if ($peserta->foto_surat_pernyataan)
-                                                <img src="{{ asset('frontend/peserta/' . $peserta->foto_surat_pernyataan) }}"
+                                                <br>
+                                                <img src="{{ asset('backend/image/' . $peserta->foto_surat_pernyataan) }}"
                                                     alt="" width="200">
                                             @else
                                                 <br>
@@ -108,7 +110,8 @@
                                         <div class="form-group">
                                             <label>Foto Siswa/ Siswi </label>
                                             @if ($peserta->foto_siswa)
-                                                <img src="{{ asset('frontend/peserta/' . $peserta->foto_siswa) }}" alt=""
+                                                <br>
+                                                <img src="{{ asset('backend/image/' . $peserta->foto_siswa) }}" alt=""
                                                     width="200">
                                             @else
                                                 <br>
@@ -161,7 +164,8 @@
                                         <div class="form-group">
                                             <label>Foto Akta </label>
                                             @if ($peserta->foto_akta_lahir)
-                                                <img src="{{ asset('frontend/peserta/' . $peserta->foto_akta_lahir) }}"
+                                                <br>
+                                                <img src="{{ asset('backend/image/' . $peserta->foto_akta_lahir) }}"
                                                     alt="" width="200">
                                             @else
                                                 <br>
@@ -209,23 +213,14 @@
     <!-- /.content -->
 @endsection
 
-{{-- @push('page-script')
+@push('page-script')
+    <script src="{{ asset('css/image-zoom.css') }}"></script>
+    <script src="{{ asset('js/image-zoom.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            $(document).on("click", "#update-data", function() {
-                var status = $("#status").val();
-                var url = 
-                if (status == '') {
-                    alert('isi nama konsumen');
-                } else {
-                    window.open(
-                        url + "welcome/saveDepok/" + id,
-                        "_blank", 'toolbar=yes, location=yes, status=yes, menubar=yes, scrollbars=yes'
-                    );
-                    window.focus();
-                    // location.reload();
-                }
+        $(function() {
+            $('.my-gallery').imageZoom({
+                $(this).imageZoom();
             });
         });
     </script>
-@endpush --}}
+@endpush

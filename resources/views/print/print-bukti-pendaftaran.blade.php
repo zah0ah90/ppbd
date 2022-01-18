@@ -152,7 +152,8 @@
                     </div>
                     <div class="col-4">
                         @if ($peserta->foto_siswa)
-                            <img src="{{ asset('frontend/peserta' . $peserta->foto_siswa) }}" alt=''>
+                            <img src="{{ asset('backend/image/' . $peserta->foto_siswa) }}" style="width: 200px"
+                                alt=''>
 
                         @else
                             <h4 class="text-center">Belum Upload FOTO SISWA</h4>
