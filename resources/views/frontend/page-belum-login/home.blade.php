@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{--
-    <link rel="stylesheet" href="/css/whatsapp.css"> --}}
+    {{-- <link rel="stylesheet" href="/css/whatsapp.css"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/whatsapp.css') }}">
     <title>Home</title>
 
 </head>
 
 <body>
+    @include('sweetalert::alert')
 
     <!-- NAVBAR -->
     @include('frontend.page-belum-login.layouts.navbar')
@@ -30,7 +30,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 {{-- <img src="/asset/carusel-home-1.png" class="d-block w-100" alt="..."> --}}
-                <img src="{{ asset('frontend/gambar/carusel-home-1.png')  }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('frontend/gambar/carusel-home-1.png') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block"
                     style="bottom: 160px !important;color: black;font-weight: bold;">
                     <div class="container">
@@ -41,7 +41,7 @@
                                         TELAH DIBUKA!
                                         2021/2022</h2>
                                 </b>
-                                <a href="{{route('login')}}" class="btn btn-primary mt-4 text-dark">DAFTAR ONLINE</a>
+                                <a href="{{ route('login') }}" class="btn btn-primary mt-4 text-dark">DAFTAR ONLINE</a>
                             </div>
                             <div class="col-sm-4"></div>
                         </div>
@@ -51,7 +51,7 @@
 
             <div class="carousel-item">
                 {{-- <img src="/asset/carusel-home-2.png" class="d-block w-100" alt=""> --}}
-                <img src="{{ asset('frontend/gambar/carusel-home-2.png')  }}" class="d-block w-100" alt="">
+                <img src="{{ asset('frontend/gambar/carusel-home-2.png') }}" class="d-block w-100" alt="">
                 <div class="carousel-caption d-none d-md-block">
                     <div class="card mx-auto" style="background: rgba(0, 0, 0, 0.3);
                     border-radius: 16px;width: 60%;">
@@ -146,7 +146,7 @@
                     <div class="row">
                         <div class="col-md-5">
                             {{-- <img src="/asset/kepala-sekolah.png" alt="" style="width: 100%; height: 345px;"> --}}
-                            <img src="{{ asset('frontend/gambar/kepala-sekolah.png')  }}" alt=""
+                            <img src="{{ asset('frontend/gambar/kepala-sekolah.png') }}" alt=""
                                 style="width: 100%; height: 345px;">
                         </div>
                         <div class="col-md-7" style="text-align: justify;">
@@ -206,7 +206,7 @@
                     box-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);height: 196px;">
                         <div class="card-body">
                             <div style="text-align: center;font-size: 50px;"><b><i class="fas fa-user-friends"></i>
-                                    12</b></div>
+                                    60</b></div>
                             <div style="font-size: 20px;
                             line-height: 24px;text-align: center;">Peserta Didik</div>
                         </div>
@@ -217,7 +217,7 @@
                     <div class="card" style="background: rgba(255, 255, 255, 0.4);
                     box-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);height: 196px;">
                         <div class="card-body">
-                            <div style="text-align: center;font-size: 50px;"><b><i class="far fa-building"></i> 12</b>
+                            <div style="text-align: center;font-size: 50px;"><b><i class="far fa-building"></i> 7</b>
                             </div>
                             <div style="font-size: 20px;
                             line-height: 24px;text-align: center;">Rombongan Belajar</div>
@@ -230,7 +230,7 @@
                     box-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);height: 196px;">
                         <div class="card-body">
                             <div style="text-align: center;font-size: 50px;"><b><i
-                                        class="fas fa-chalkboard-teacher"></i> 12</b></div>
+                                        class="fas fa-chalkboard-teacher"></i> 8</b></div>
                             <div style="font-size: 20px;
                             line-height: 24px;text-align: center;">Pendidik Dan Tenaga Pendidik</div>
                         </div>
@@ -241,7 +241,7 @@
                     <div class="card" style="background: rgba(255, 255, 255, 0.4);
                     box-shadow: 5px 10px 4px rgba(0, 0, 0, 0.25);height: 196px;">
                         <div class="card-body">
-                            <div style="text-align: center;font-size: 50px;"><b><i class="fas fa-trophy"></i> 12</b>
+                            <div style="text-align: center;font-size: 50px;"><b><i class="fas fa-trophy"></i> 18</b>
                             </div>
                             <div style="font-size: 20px;
                             line-height: 24px;text-align: center;">Prestasi SD Negeri Nurul Salam</div>
@@ -354,9 +354,15 @@
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+    </script>
     -->
 
     @include('frontend.page-belum-login.layouts.whatsapp')

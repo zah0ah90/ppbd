@@ -117,6 +117,16 @@
                 </li>
 
 
+                <li class="nav-item">
+                    <a href="{{ route('closing-view') }}" class="nav-link">
+                        <i class="nav-icon fas fa-door-closed"></i>
+                        <p>
+                            Status Closing
+                        </p>
+                    </a>
+                </li>
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

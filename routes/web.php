@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('peserta/{id}', 'PesertaController@update')->name('peserta-update');
         Route::delete('peserta/{id}', 'PesertaController@destroy')->name('peserta-delete');
 
+        Route::get('closing-view', [AuthController::class, 'closing_view'])->name('closing-view');
+        Route::post('closing-post', [AuthController::class, 'closing_post'])->name('closing-post');
 
         Route::get('user-akun-view', [AuthController::class, 'user_akun_view'])->name('user-akun-view');
         Route::get('edit-akun-view/{id}', [AuthController::class, 'edit_akun_view'])->name('edit-akun-view');

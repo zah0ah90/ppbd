@@ -82,16 +82,24 @@ class AuthController extends Controller
 
     public function register()
     {
-        $user = false;
-        $user = Auth::user();
-        if ($user == '') {
-            return view('frontend.page-belum-login.akun-daftar');
-        } else if ($user->level == 'admin') {
-            Alert::info('Anda Sudah Login', 'Admin');
-            return redirect('dashboard');
-        } else if ($user->level == 'wali') {
-            Alert::info('Anda Sudah Login', 'Wali Peserta');
-            return redirect('dashboard-wali');
+        $cek_closingan = DB::table('tbl_status')->where('id', 1)->first();
+        // print_r($cek_closingan);
+        // die();
+        if ($cek_closingan->status == 'open') {
+            $user = false;
+            $user = Auth::user();
+            if ($user == '') {
+                return view('frontend.page-belum-login.akun-daftar');
+            } else if ($user->level == 'admin') {
+                Alert::info('Anda Sudah Login', 'Admin');
+                return redirect('dashboard');
+            } else if ($user->level == 'wali') {
+                Alert::info('Anda Sudah Login', 'Wali Peserta');
+                return redirect('dashboard-wali');
+            }
+        } else {
+            Alert::info('Mohon maaf tidak dapat mendaftar', 'Karena sudah closing');
+            return redirect('/');
         }
     }
 
@@ -200,6 +208,28 @@ class AuthController extends Controller
         } else {
             Alert::error('Gagal', 'Gagal update User');
             return redirect()->back();
+        }
+    }
+
+    public function closing_view()
+    {
+        $closing = DB::table('tbl_status')->where('id', '=', '1')->first();
+        // print_r($closing);
+        return view('backend.closing.index', ['closing' => $closing]);
+    }
+
+    public function closing_post(Request $request)
+    {
+        $update_tbl_closing = DB::table('tbl_status')
+            ->where('id', 1)
+            ->update(['status' => $request->status]);
+
+        if ($update_tbl_closing) {
+            Alert::success('Berhasil', 'Berhasil mengubah status closing');
+            return redirect('dashboard');
+        } else {
+            Alert::error('Gagal', 'Mengubah status closing');
+            return redirect('dashboard');
         }
     }
 }
