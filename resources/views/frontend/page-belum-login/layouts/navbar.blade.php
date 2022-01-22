@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background: #C2ADFF;">
     <div class="container">
-        <a class="navbar-brand" href="landing-page-home.html">
+        <a class="navbar-brand" href="{{ route('dashboard-home-frontend') }}">
             <div class="row">
                 <div class="col-sm-2"><img src="{{ asset('frontend/gambar/logo-sd.png') }}" alt=""></div>
                 <div class="col-sm-9">
