@@ -59,6 +59,7 @@ class PesertaController extends Controller
     public function edit($id)
     {
         $peserta = Peserta::findOrFail($id);
+        // $peserta = DB::table('tbl_peserta')->where('')
         return view('backend.peserta.edit', ['peserta' =>  $peserta]);
     }
 
@@ -397,30 +398,30 @@ class PesertaController extends Controller
 
         if ($image = $request->file('foto_siswa')) {
             $destinationPath = 'backend/image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $profileImage = date('YmdHis') . "foto_siswa." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['foto_siswa'] = "$profileImage";
         }
 
-        if ($image = $request->file('foto_akta_lahir')) {
-            $destinationPath = 'backend/image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['foto_akta_lahir'] = "$profileImage";
+        if ($image1 = $request->file('foto_akta_lahir')) {
+            $destinationPath1 = 'backend/image/';
+            $profileImage1 = date('YmdHis') . "akta_lahir." . $image1->getClientOriginalExtension();
+            $image1->move($destinationPath1, $profileImage1);
+            $input['foto_akta_lahir'] = "$profileImage1";
         }
 
-        if ($image = $request->file('foto_kartu_keluarga')) {
-            $destinationPath = 'backend/image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['foto_kartu_keluarga'] = "$profileImage";
+        if ($image2 = $request->file('foto_kartu_keluarga')) {
+            $destinationPath2 = 'backend/image/';
+            $profileImage2 = date('YmdHis') . "kartu_keluarga." . $image2->getClientOriginalExtension();
+            $image2->move($destinationPath2, $profileImage2);
+            $input['foto_kartu_keluarga'] = "$profileImage2";
         }
 
-        if ($image = $request->file('foto_surat_pernyataan')) {
-            $destinationPath = 'backend/image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['foto_surat_pernyataan'] = "$profileImage";
+        if ($image3 = $request->file('foto_surat_pernyataan')) {
+            $destinationPath3 = 'backend/image/';
+            $profileImage3 = date('YmdHis') . "surat_pernyataan." . $image3->getClientOriginalExtension();
+            $image3->move($destinationPath3, $profileImage3);
+            $input['foto_surat_pernyataan'] = "$profileImage3";
         }
 
         // $foto_siswa = $request->file('foto_siswa');
