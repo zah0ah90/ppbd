@@ -33,7 +33,22 @@
                     <td>{{ $data->nama_ayah_kandung }} | {{ $data->nama_ibu_kandung }}</td>
                     <td>
                         <b>
-                            {{ $data->status == 1 ? 'Di Terima' : (0 ? 'Di Tolak' : (3 ? 'Menunggu Konfirmasi Pembayaran' : 'Di Proses')) }}</b>
+                            @if ($data->status == 1)
+                                Di Terima
+                            @endif
+
+                            @if ($data->status == 0)
+                                Di Tolak
+                            @endif
+
+                            @if ($data->status == 3)
+                                Menunggu Konfirmasi
+                            @endif
+
+                            @if ($data->status == 2)
+                                Di Proses
+                            @endif
+                        </b>
                     </td>
 
                 </tr>

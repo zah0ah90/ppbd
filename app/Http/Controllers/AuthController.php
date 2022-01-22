@@ -43,7 +43,7 @@ class AuthController extends Controller
         ]);
 
         $cekAkun = DB::table('users')
-            ->where('username', '=', "$request->username")
+            ->where('username', 'like', "%$request->username%")
             ->where('deleted_at', '=', null)
             ->first();
         // echo '<pre>';
@@ -54,7 +54,7 @@ class AuthController extends Controller
             // echo 'tidak aktif';
             Alert::error('Gagal Login', 'Terjadi Kesalahan');
             return redirect('login');
-        } else  if ($cekAkun->username == $request->username) {
+        } else if ($cekAkun->username) {
             // echo 'aktif';
             $credentials = $request->only('username', 'password');
             if (Auth::attempt($credentials)) {
