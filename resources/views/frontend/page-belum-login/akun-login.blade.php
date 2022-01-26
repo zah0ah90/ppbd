@@ -47,6 +47,7 @@
         <br>
         <br>
         <p style="margin-bottom: 0px;">Belum Punya Akun? <a href="{{ route('register') }}">Daftar Disini!</a></p>
+        <p style="margin-bottom: 0px;">Lupa password <a href="{{ route('lupa-password') }}">Klik!</a></p>
     </div>
 </div>
 @endsection
