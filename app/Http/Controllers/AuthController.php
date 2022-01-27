@@ -53,7 +53,7 @@ class AuthController extends Controller
         if ($cekAkun == null) {
             // echo 'tidak aktif';
             Alert::error('Gagal Login', 'Terjadi Kesalahan');
-            return redirect('login');
+            return redirect()->route('login');
         } else if ($cekAkun->username) {
             // echo 'aktif';
             $credentials = $request->only('username', 'password');
@@ -68,6 +68,9 @@ class AuthController extends Controller
                     return redirect('dashboard-wali');
                 }
                 // return redirect('/');
+            } else {
+                Alert::error('Gagal Login', 'Terjadi Kesalahan');
+                return redirect()->route('login');
             }
             // echo 'aktif';
         }
