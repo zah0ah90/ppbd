@@ -53,9 +53,9 @@
                                     <td>{{ $data->status == 1 ? 'Tampilkan' : 'Tidak Tampilkan' }}</td>
                                     <td>{{ $data->keterangan }}</td>
                                     <td>
+                                        <a class="btn btn-primary" href="{{ route('berita.edit',$data->id) }}">Edit</a>
                                         <form action="{{ route('berita.destroy',$data->id) }}" method="POST">
-                                            <a class="btn btn-primary"
-                                                href="{{ route('berita.edit',$data->id) }}">Edit</a>
+
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"

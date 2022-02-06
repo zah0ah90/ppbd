@@ -15,7 +15,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.page-belum-login.home');
+        $data['berita'] = DB::table('tbl_berita')->where('type',  'berita')->where('deleted_at', null)->where('status', 1)->orderBy('created_at', 'desc')->limit(4)->get();
+        $data['pengumuman'] = DB::table('tbl_berita')->where('type',  'pengumuman')->where('deleted_at', null)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $data['status'] = DB::table('tbl_status')->first();
+        // print_r($data['status']);
+        // die();
+
+
+        return view('frontend.page-belum-login.home', $data);
     }
 
     public function kontak()
@@ -40,14 +47,17 @@ class HomeController extends Controller
     }
     public function pengumuman()
     {
-        return view('frontend.page-belum-login.pengumuman');
+        $data['pengumuman'] = DB::table('tbl_berita')->where('type',  'pengumuman')->where('deleted_at', null)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        return view('frontend.page-belum-login.pengumuman', $data);
     }
     public function gallerivideo()
     {
-        return view('frontend.page-belum-login.galleri-foto');
+        $data['video'] = DB::table('tbl_galleri_video')->where('deleted_at', null)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        return view('frontend.page-belum-login.galleri-video', $data);
     }
     public function gallerifoto()
     {
-        return view('frontend.page-belum-login.galleri-video');
+        $data['foto'] = DB::table('tbl_galleri_foto')->where('deleted_at', null)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        return view('frontend.page-belum-login.galleri-foto', $data);
     }
 }

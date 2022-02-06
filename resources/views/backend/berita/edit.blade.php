@@ -32,9 +32,10 @@
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body table-responsive ">
-                        <form action="{{ route('berita.update',$berita->id) }}" method="POST">
+                        <form action="{{ route('berita.update', $berita->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group">
                                 <label>Judul</label>
                                 <input type="text" class="form-control" name="nama" id="nama"

@@ -64,8 +64,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select name="status" class="form-control">
-                                    <option value="1" {{ $data->status == 1 ? 'selected' : ''}}>Tampilkan</option>
-                                    <option value="0" {{ $data->status == 0 ? 'selected' : ''}}>Tidak Di Tampilkan
+                                    <option value="1" {{ $pengumuman->status == 1 ? 'selected' : ''}}>Tampilkan</option>
+                                    <option value="0" {{ $pengumuman->status == 0 ? 'selected' : ''}}>Tidak Di Tampilkan
                                     </option>
                                 </select>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BeritaController extends Controller
 {
@@ -15,9 +16,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $berita = Berita::where('type', '=','berita')->get();
+        $berita = Berita::where('type', '=', 'berita')->get();
         // $user = User::where('person_id', '=', 1);
-        
+
         return view('backend.berita.index', ['berita' => $berita]);
     }
 
@@ -47,7 +48,7 @@ class BeritaController extends Controller
 
         $berita = Berita::create($request->all());
 
-        if($berita->save()) {
+        if ($berita->save()) {
             return redirect()->route('berita.index')->with('success', 'Berhasil menambahkan data berita');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data berita');
@@ -71,10 +72,24 @@ class BeritaController extends Controller
      * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function edit(Berita $berita)
+    public function edit($id)
     {
-        return view('backend.berita.edit');
+        // echo 'test' . $id;
+        // die();
+        $berita = DB::table('tbl_berita')->where('id', '=', $id)->first();
+
+        return view('backend.berita.edit', ['berita' => $berita]);
     }
+
+
+
+
+
+
+    // public function edit(Pengumuman $pengumuman)
+    // {
+    //     return view('backend.pengumuman.edit',compact('pengumuman'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -83,7 +98,7 @@ class BeritaController extends Controller
      * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required',
@@ -91,13 +106,16 @@ class BeritaController extends Controller
             'tanggal_posting' => 'required',
         ]);
 
-        // $pengumuman = Pengumuman::find($id);
-        // $pengumuman->nis = $request->nis;
-        // $pengumuman->nama = $request->nama;
+        $berita = DB::table('tbl_berita')
+            ->where('id', $id)
+            ->update([
+                'nama' => $request->nama,
+                'tanggal_posting' => $request->tanggal_posting,
+                'keterangan' => $request->keterangan,
+                'status' => $request->status,
+            ]);
 
-        $berita->update($request->all());
-
-        if($berita) {
+        if ($berita) {
             return redirect()->route('berita.index')->with('success', 'Berhasil memperbarui data berita');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui data berita');
@@ -110,9 +128,18 @@ class BeritaController extends Controller
      * @param  \App\Models\Berita  $berita
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Berita $berita)
+    public function destroy($id)
     {
-        $berita->delete();
+        // echo 'test' . $id;
+        // die();
+        // $berita->delete();
+        // DB::table('tbl_berita')->where('id', '=', $id)->delete();
+
+        $berita = DB::table('tbl_berita')
+            ->where('id', $id)
+            ->update([
+                'deleted_at' =>  date('Y-m-d H:i:s')
+            ]);
         return redirect()->back()->with('success', 'Berhasil Menghapus!');
     }
 }

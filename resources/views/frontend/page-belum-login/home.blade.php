@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    {{-- <link rel="stylesheet" href="/css/whatsapp.css"> --}}
+    {{--
+    <link rel="stylesheet" href="/css/whatsapp.css"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/whatsapp.css') }}">
     <title>Home</title>
 
@@ -38,8 +39,13 @@
                             <div class="col-sm-8"><b>
                                     <h2 style="margin-top: -200px;font-size: 30px;font-weight: bold;">Penerimaan Peserta
                                         Didik Baru (PPDB)
+                                        @if ($status->status == 'open')
                                         TELAH DIBUKA!
-                                        2021/2022</h2>
+                                        @php
+                                        echo date('Y', strtotime('1 year')) . '/' . date('Y', strtotime('+1 year')) ;
+                                        @endphp
+                                        @endif
+                                    </h2>
                                 </b>
                                 <a href="{{ route('login') }}" class="btn btn-primary mt-4 text-dark">DAFTAR ONLINE</a>
                             </div>
@@ -179,13 +185,47 @@
                     border-radius: 5px;">
                         <div class="card-body">
                             <h4 class="card-title">Pengumuman</h4>
-                            <img src="/asset/pengumuman-home.png " style="width: 100%;" alt="">
+                            <img src="/frontend/gambar/pengumuman-home.png " style="width: 100%;" alt="">
                             <p class="card-title mt-1">
-                                <b style="font-size: 14px;">Pembukaan PPDB 2021/2022</b>
-                                <b style="font-size: 14px;color: rgba(0, 0, 0, 0.5);">26-11-2021</b>
+                                {{-- <b style="font-size: 14px;">1</b>
+                                <b style="font-size: 14px;color: rgba(0, 0, 0, 0.5);">26-11-2021</b> --}}
+
+                            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+
+                                    @foreach ($pengumuman as $datap)
+                                    <div class="carousel-item text-center active" data-interval="10000">
+                                        <b style="font-size: 14px;text">{{ $datap->nama}}</b><br>
+                                        <b style="font-size: 14px;color: rgba(0, 0, 0, 0.5);">
+                                            {{$datap->tanggal_posting}}</b>
+
+                                    </div>
+                                    @endforeach
+
+
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                    data-target="#carouselExampleInterval" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                    data-target="#carouselExampleInterval" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </button>
+                            </div>
+
+
+
+
                             </p>
                             <p></p>
-                            <a href="#" class="btn btn-primary">Selengkapnya</a>
+
+
+
+                            <a href="{{ route('pengumuman-frontend')}}"
+                                class="btn-block btn btn-primary">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -263,7 +303,82 @@
             <br>
             <br>
             <!-- AWAL BERITA -->
+            {{-- <div class="row">
+                <div class="col-sm-3">
+                    <div style="text-align: center;margin-bottom: 10px;">
+                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
+                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
+                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
+                        </div>
+                    </div>
+                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
+                            2013-11 November 2021 8 Tahun</b></p>
+                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
+                    </div>
+                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Interdum
+                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
+                </div>
+
+                <div class="col-sm-3">
+                    <div style="text-align: center;margin-bottom: 10px;">
+                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
+                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
+                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
+                        </div>
+                    </div>
+                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
+                            2013-11 November 2021 8 Tahun</b></p>
+                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
+                    </div>
+
+                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Interdum
+                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
+                </div>
+
+                <div class="col-sm-3">
+                    <div style="text-align: center;margin-bottom: 10px;">
+                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
+                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
+                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
+                        </div>
+                    </div>
+                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
+                            2013-11 November 2021 8 Tahun</b></p>
+                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
+                    </div>
+                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Interdum
+                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
+                </div>
+
+                <div class="col-sm-3">
+                    <div style="text-align: center;margin-bottom: 10px;">
+                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
+                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
+                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
+                        </div>
+                    </div>
+                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
+                            2013-11 November 2021 8 Tahun</b></p>
+                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
+                    </div>
+                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Interdum
+                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
+                </div>
+
+
+            </div> --}}
             <div class="row">
+                {{-- @if($berita == null)
+
+                @endif --}}
+
+                @if ($berita)
+
+                @foreach($berita as $data)
                 <div class="col-sm-3">
                     <div style="text-align: center;margin-bottom: 10px;">
                         <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
@@ -271,66 +386,22 @@
                             <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
                         </div>
                     </div>
-                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
-                            2013-11 November 2021 8 Tahun</b></p>
+                    <p style="text-align: center;font-size: 12px;"><b>{{ $data->nama }}<br>
+                            {{$data->tanggal_posting}}</b></p>
                     <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
                     </div>
-                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Interdum
-                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
+                    <p style="font-size: 12px;text-align: justify;">
+                        {{$data->keterangan}}
+                    </p>
+
                 </div>
-
-                <div class="col-sm-3">
-                    <div style="text-align: center;margin-bottom: 10px;">
-                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
-                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
-                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
-                        </div>
-                    </div>
-                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
-                            2013-11 November 2021 8 Tahun</b></p>
-                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
-                    </div>
-
-                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Interdum
-                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
-                </div>
-
-                <div class="col-sm-3">
-                    <div style="text-align: center;margin-bottom: 10px;">
-                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
-                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
-                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
-                        </div>
-                    </div>
-                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
-                            2013-11 November 2021 8 Tahun</b></p>
-                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
-                    </div>
-                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Interdum
-                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
-                </div>
-
-                <div class="col-sm-3">
-                    <div style="text-align: center;margin-bottom: 10px;">
-                        <div class="card rounded-circle mx-auto" style="height: 59px;width: 59px;background: rgba(255, 255, 255, 0.4);
-                        box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.25);">
-                            <i class="far fa-file-alt mx-auto my-auto" style="font-size: 30px;"></i>
-                        </div>
-                    </div>
-                    <p style="text-align: center;font-size: 12px;"><b>SD Negeri Nurul Salam <br>
-                            2013-11 November 2021 8 Tahun</b></p>
-                    <div class="dropdown-divider mx-auto" style="border: 1px solid rgba(0, 0, 0, 0.2);width: 30%;">
-                    </div>
-                    <p style="font-size: 12px;text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Interdum
-                        aliquam, nulla eu, amet, aliquam placerat cursus. Cras in.</p>
-                </div>
+                @endforeach
 
 
+
+                @endif
             </div>
+
             <br>
             <br>
             <!-- AKHIR BERITA -->

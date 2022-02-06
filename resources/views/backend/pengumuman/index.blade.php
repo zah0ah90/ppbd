@@ -53,11 +53,11 @@
                                     <td>{{ $data->status == 1 ? 'Tampilkan' : 'Tidak Tampilkan' }}</td>
                                     <td>{{ $data->keterangan }}</td>
                                     <td>
-                                        
+
                                         <a class="btn btn-primary"
-                                        href="{{ route('pengumuman.edit',$data->id) }}">Edit</a>
+                                            href="{{ route('pengumuman.edit',$data->id) }}">Edit</a>
                                         <a href="#" data-id="{{ $data->id }}" class="btn btn-danger swal-confirm">
-                                            <form action="{{ route('pengumuman.destroy',$data->id) }}" 
+                                            <form action="{{ route('pengumuman.destroy',$data->id) }}"
                                                 id="delete{{ $data->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
@@ -92,8 +92,8 @@
 
 
 @push('page-script')
-    <script>
-        $(".swal-confirm").click(function(e) {
+<script>
+    $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
                     title: 'Apakah anda yakin?',
@@ -114,5 +114,5 @@
                 });
         });
 
-    </script>
+</script>
 @endpush

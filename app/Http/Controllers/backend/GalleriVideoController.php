@@ -17,7 +17,7 @@ class GalleriVideoController extends Controller
     {
         $galleri_video = GalleriVideo::all();
         // $user = User::where('person_id', '=', 1);
-        
+
         return view('backend.galleri_video.index', ['galleri_video' => $galleri_video]);
     }
 
@@ -43,10 +43,17 @@ class GalleriVideoController extends Controller
             'nama' => 'required',
             'embed_link' => 'required',
         ]);
+        $balik = strrev($request->embed_link);
+        $hasil = strrev(substr($balik, 0, '11'));
 
-        $galleri_video = GalleriVideo::create($request->all());
+        $embedYoutube = "https://www.youtube.com/embed/" . $hasil;
 
-        if($galleri_video->save()) {
+        $galleri_video = GalleriVideo::create([
+            'nama' => $request->nama,
+            'embed_link' => $embedYoutube,
+        ]);
+
+        if ($galleri_video->save()) {
             return redirect()->route('galleri_video.index')->with('success', 'Berhasil menambahkan data Galleri Video');
         } else {
             return redirect()->back()->with('error', 'Gagal menambahkan data Galleri Video');
@@ -78,7 +85,7 @@ class GalleriVideoController extends Controller
         // die();
 
         // dd($galleriVideo->get());
-        return view('backend.galleri_video.edit',compact('galleriVideo'));
+        return view('backend.galleri_video.edit', compact('galleriVideo'));
     }
 
     /**
@@ -95,13 +102,18 @@ class GalleriVideoController extends Controller
             'embed_link' => 'required',
         ]);
 
-        // $galleri_video = Galleri_video::find($id);
-        // $galleri_video->nis = $request->nis;
-        // $galleri_video->nama = $request->nama;
+        $balik = strrev($request->embed_link);
+        $hasil = strrev(substr($balik, 0, '11'));
 
-        $galleriVideo->update($request->all());
+        $embedYoutube = "https://www.youtube.com/embed/" . $hasil;
+        // $pengumuman->update($request->all());
+        $galleriVideo->update([
+            'nama' => $request->nama,
+            'embed_link' => $embedYoutube,
+            'status' => $request->status
+        ]);
 
-        if($galleriVideo) {
+        if ($galleriVideo) {
             return redirect()->route('galleri_video.index')->with('success', 'Berhasil memperbarui data Galleri Video');
         } else {
             return redirect()->back()->with('error', 'Gagal memperbarui data Galleri Video');

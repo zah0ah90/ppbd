@@ -13,11 +13,13 @@ class AddStatusLupaPassowrdUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('status_lupa_password',20)->nullable();
-        }
-        }
-    
+        Schema::table('tbl_galleri_foto', function (Blueprint $table) {
+            $table->string('image')->nullable();
+        });
+    }
+
+
+
 
     /**
      * Reverse the migrations.

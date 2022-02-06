@@ -5,7 +5,22 @@
 <br>
 <!-- isi content -->
 <div class="row">
-    NANTI DI BIKIN EMBED DARI YOUTUBE AJAH
+    @foreach ($video as $item)
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-title p-3 text-center"><b>{{$item->nama}}</b></div>
+            <div class="card-body">
+                <iframe width="300" height="315" src={{$item->embed_link}} frameborder="0" allowfullscreen>
+                </iframe>
+
+
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+
+
 
 </div>
 @endsection

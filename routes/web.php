@@ -14,12 +14,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backendwali\DashboardWaliController;
 // Auth::routes();
 
-  
+
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
@@ -52,6 +52,9 @@ Route::get('konfirmasi-pembayaran-peserta', [PesertaController::class, 'konfirma
 // ROUTE UNTUK ADMIN
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cek_login:admin']], function () {
+        // Route::get('berita-in/{id}', 'BeritaController@edit')->name('berita-update-get');
+        // Route::post('berita/{id}', 'BeritaController@update')->name('berita-update');
+
         Route::post('peserta/{id}', 'PesertaController@update')->name('peserta-update');
         Route::delete('peserta/{id}', 'PesertaController@destroy')->name('peserta-delete');
 
@@ -64,8 +67,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update-akun-user', [AuthController::class, 'edit_akun_update'])->name('update-akun-user');
 
         Route::resource('peserta', PesertaController::class);
+
+
+
+
         Route::resource('pengumuman', PengumumanController::class);
+
+
+
         Route::resource('berita', BeritaController::class);
+        // Route::post('berita/{id}/edit', 'BeritaController@update')->name('berita-update');
+        // Route::delete('berita/{id}', 'BeritaController@destroy')->name('berita-delete');
+
+
         Route::resource('galleri_video', GalleriVideoController::class);
         Route::resource('galleri_foto', GalleriFotoController::class);
         Route::resource('guru', GuruController::class);

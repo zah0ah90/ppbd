@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <p style="text-align: center;"><b style="font-size: 23px;">DAFTAR PESERTA</b></p>
-        <form action="{{ route('proses_register') }}" method="post">
+        <form action="{{ route('proses_register') }}" method="post" autocomplete="off">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group row">
                 <div class="col-sm-2 ">

@@ -1,29 +1,34 @@
 @extends('frontend.page-belum-login.layouts.app')
 @section('content')
-  <div style="font-size: 26px;"><b>PENGUMUMAN</b></div>
-  <div class="dropdown-divider" style="border: 3px solid rgba(0, 0, 0, 0.2);"></div>
-  <br>
-  <div class="row">
+<div style="font-size: 26px;"><b>PENGUMUMAN</b></div>
+<div class="dropdown-divider" style="border: 3px solid rgba(0, 0, 0, 0.2);"></div>
+<br>
+<div class="row">
 
-      <div class="col-6">
-          <img src="{{ asset('frontend/gambar/pengumuman-home.png')}}" alt="" style="width: 465px;">
-      </div>
-      <div class="col-6">
-          <p style="text-align: justify;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna nibh tristique est elit etiam eget
-              egestas morbi. Vitae pretium ac egestas nullam aliquam arcu, praesent enim interdum. Elementum
-              quis convallis tempus gravida at congue. Tellus vel lacinia nulla quisque enim, proin porttitor
-              justo eget. Nec elementum hac dui felis diam. Purus, adipiscing augue ut praesent purus tellus
-              luctus ipsum. Ipsum ut condimentum tempus, diam proin a.
-              Scelerisque ultrices arcu lectus id cras dapibus commodo. Sed proin arcu non interdum tristique
-              pellentesque. In risus in sodales diam risus nec. Tempus dictum tincidunt fringilla ornare arcu.
-              Ultrices pulvinar tellus odio egestas morbi tempor ultrices pharetra. Blandit duis convallis sit
-              proin duis quam aliquam elementum senectus. Pellentesque purus sit bibendum ullamcorper placerat
-              in sed a. Tortor arcu quis dignissim quam. Curabitur sit diam dapibus massa.
-          </p>
-      </div>
+    <div class="col-sm-6 offset-md-3">
+        <img src="{{ asset('frontend/gambar/pengumuman-home.png')}}" alt=""
+            style="width: 465px;border-radius: .50rem !important">
+    </div>
+</div>
 
 
+<div class="row mt-5">
+    @foreach ($pengumuman as $item)
+    <div class="col-md-4 text-center">
+        <div class="card rounded" style="background-color: #CCC7DD;border-radius: 1rem !important">
+            <div class="card-title mt-3">
+                <b>
+                    {{$item->nama}}
+                </b>
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted">{{$item->tanggal_posting}}</h6>
+            <div class="card-body text-wrap">
+                {{$item->keterangan}}
+            </div>
+        </div>
 
-  </div>
+    </div>
+
+    @endforeach
+</div>
 @endsection

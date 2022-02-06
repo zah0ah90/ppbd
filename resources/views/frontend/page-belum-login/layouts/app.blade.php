@@ -14,6 +14,8 @@
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js">
+    </script>
     <title>PPDB</title>
 
 </head>
@@ -43,8 +45,7 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js">
-    </script>
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
