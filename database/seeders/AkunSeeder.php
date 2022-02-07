@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AkunSeeder extends Seeder
 {
@@ -36,5 +37,9 @@ class AkunSeeder extends Seeder
         foreach ($user as $key => $value) {
             User::create($value);
         }
+
+        DB::table('tbl_status')->insert([
+            'status' => 'open',
+        ]);
     }
 }

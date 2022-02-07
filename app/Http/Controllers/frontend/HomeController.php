@@ -37,7 +37,7 @@ class HomeController extends Controller
 
     public function tenaga_pendidik()
     {
-        $table_guru = DB::table('tbl_guru')->where('deleted_at', '=', null)->get();
+        $table_guru = DB::table('tbl_guru')->where('status', 1)->where('deleted_at', '=', null)->get();
         return view('frontend.page-belum-login.tenaga-pendidik', ['guru' => $table_guru]);
     }
 
