@@ -18,7 +18,7 @@
     <td align="center" style="font-family: 'Lato', sans-serif; font-size:14px; color:#2a3a4b; line-height:24px; font-weight: 300;">
         Mohon maaf siswa/siswi {{ $data['nama_lengkap'] }} ,
         Data yang anda kirim belum memenuhi syarat pendaftaran!'
-        Untuk info lebih lanjut silahkan <b><a href="https://wa.me/6281234567890">Klik disini</a></b>
+        Untuk info lebih lanjut silahkan tanyakan <b><a href="https://wa.me/6281234567890">disinih / Klik disini</a></b>
         <br> terimakasih sudah
         mendaftar ppdb online SDN NURUL SALAM
     </td>
