@@ -20,12 +20,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('dashboard-home-frontend') }}">Home</a>
+                    <a class="nav-link" href="{{ route('dashboard-home-frontend') }}">Beranda</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-expanded="false">
-                        Profile
+                        Profil
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #C2ADFF;">
                         <a class="dropdown-item" href="{{ route('sejarah-frontend') }}">Sejarah</a>
@@ -39,7 +39,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-expanded="false">
-                        Gallery
+                        Galeri
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #C2ADFF;">
                         <a class="dropdown-item" href="{{ route('gallerifoto-frontend') }}">Foto</a>
