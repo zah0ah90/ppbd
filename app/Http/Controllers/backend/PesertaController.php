@@ -92,7 +92,8 @@ class PesertaController extends Controller
         $data = [
             'nama_lengkap' => $nama_lengkap,
             'status' => $status,
-            'nomor_handphone' => $nomor_handphone
+            'nomor_handphone' => $nomor_handphone,
+            'id' => $id
         ];
 
         $this->store_whatsapp($data);
@@ -293,6 +294,7 @@ class PesertaController extends Controller
 
     public function print_peserta_semua()
     {
+
         $peserta = DB::table('tbl_peserta')
             ->select('tbl_peserta.no_pendaftaran', 'tbl_peserta.status', 'tbl_peserta.deleted_at', 'tbl_peserta.nama_lengkap_siswa', 'tbl_wali.nama_ibu_kandung', 'tbl_wali.nama_ayah_kandung', 'tbl_wali.nomor_handphone_ibu', 'tbl_wali.nomor_handphone_ayah', 'tbl_wali.alamat')
             ->leftJoin('tbl_wali', 'tbl_peserta.wali_id', '=', 'tbl_wali.id')
@@ -307,16 +309,22 @@ class PesertaController extends Controller
 
     public function print_peserta_satu($id)
     {
-        $peserta = DB::table('tbl_peserta')
-            ->select('tbl_peserta.no_pendaftaran', 'tbl_peserta.id', 'tbl_peserta.status', 'tbl_peserta.tanggal_lahir', 'tbl_peserta.anak_ke', 'tbl_peserta.berat_badan', 'tbl_peserta.agama', 'tbl_peserta.foto_siswa', 'tbl_peserta.tinggi_badan', 'tbl_peserta.riwayat_penyakit', 'tbl_peserta.kewarganegaraan', 'tbl_peserta.golongan_darah', 'tbl_peserta.bahasa', 'tbl_peserta.deleted_at', 'tbl_peserta.nama_lengkap_siswa', 'tbl_wali.nama_ibu_kandung', 'tbl_wali.nama_ayah_kandung', 'tbl_wali.nomor_handphone_ibu', 'tbl_wali.nomor_handphone_ayah', 'tbl_wali.alamat')
-            ->leftJoin('tbl_wali', 'tbl_peserta.wali_id', '=', 'tbl_wali.id')
-            ->where('tbl_peserta.deleted_at', '=', null)
-            ->where('tbl_peserta.id', '=', $id)
-            ->first();
-        // echo '<pre>';
-        // print_r($peserta);
-        // die();
-        return view('print.print-peserta-satu', ['peserta' => $peserta]);
+        $cek_login_wali = Auth::id();
+        if ($cek_login_wali) {
+            $peserta = DB::table('tbl_peserta')
+                ->select('tbl_peserta.no_pendaftaran', 'tbl_peserta.id', 'tbl_peserta.status', 'tbl_peserta.tanggal_lahir', 'tbl_peserta.anak_ke', 'tbl_peserta.berat_badan', 'tbl_peserta.agama', 'tbl_peserta.foto_siswa', 'tbl_peserta.tinggi_badan', 'tbl_peserta.riwayat_penyakit', 'tbl_peserta.kewarganegaraan', 'tbl_peserta.golongan_darah', 'tbl_peserta.bahasa', 'tbl_peserta.deleted_at', 'tbl_peserta.nama_lengkap_siswa', 'tbl_wali.nama_ibu_kandung', 'tbl_wali.nama_ayah_kandung', 'tbl_wali.nomor_handphone_ibu', 'tbl_wali.nomor_handphone_ayah', 'tbl_wali.alamat')
+                ->leftJoin('tbl_wali', 'tbl_peserta.wali_id', '=', 'tbl_wali.id')
+                ->where('tbl_peserta.deleted_at', '=', null)
+                ->where('tbl_peserta.id', '=', $id)
+                ->first();
+            // echo '<pre>';
+            // print_r($peserta);
+            // die();
+            return view('print.print-peserta-satu', ['peserta' => $peserta]);
+        } else {
+            Alert::warning('Warning', 'Di mohon unutuk login terlebih dahulu Terimakasih');
+            return redirect()->route('dashboard-home-frontend');
+        }
     }
 
     public function konfirmasi_email()

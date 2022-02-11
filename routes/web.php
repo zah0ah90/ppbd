@@ -45,7 +45,7 @@ Route::post('proses_register', [AuthController::class, 'proses_register'])->name
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::get('/print-peserta-satu/{id}', [PesertaController::class, 'print_peserta_satu'])->name('print-peserta-satu');
 
 Route::get('konfirmasi-pembayaran-peserta', [PesertaController::class, 'konfirmasi_email'])->name('konfirmasi-pembayaran-peserta');
 
@@ -87,7 +87,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('wali', WaliController::class);
 
         Route::get('/print-peserta-semua', [PesertaController::class, 'print_peserta_semua'])->name('print-peserta-semua');
-        Route::get('/print-peserta-satu/{id}', [PesertaController::class, 'print_peserta_satu'])->name('print-peserta-satu');
     });
 
     // ROUTE UNTUK WALI
