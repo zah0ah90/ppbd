@@ -8,7 +8,7 @@
                 SD Negeri Nurul Salam <br>
                 {{-- 2021/2022 --}}
                 @php
-                echo date('Y', strtotime('1 year')) . '/' . date('Y', strtotime('+1 year')) ;
+                echo date('Y') . '/' . date('Y', strtotime('+1 year')) ;
                 @endphp
 
                 <br>
@@ -16,7 +16,7 @@
             <br>
             <a class="btn btn-primary w-50 text-dark" style="background: #288BFF;
                         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                        border-radius: 5px;" href="{{ route('alur_pendaftaran') }}">ALUR PENDAFATARAN</a>
+                        border-radius: 5px;" href="{{ route('alur_pendaftaran') }}">ALUR PENDAFTARAN</a>
         </p>
     </div>
     <div class="col-6">

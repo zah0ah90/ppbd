@@ -42,7 +42,7 @@
                                         @if ($status->status == 'open')
                                         TELAH DIBUKA!
                                         @php
-                                        echo date('Y', strtotime('1 year')) . '/' . date('Y', strtotime('+1 year')) ;
+                                        echo date('Y') . '/' . date('Y', strtotime('+1 year')) ;
                                         @endphp
                                         @endif
                                     </h2>
