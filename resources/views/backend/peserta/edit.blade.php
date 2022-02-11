@@ -1,5 +1,55 @@
 @extends('backend.layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{ asset('frontend/css/zoom.css') }}">
+<script src="{{ asset('frontend/js/zoom.js') }}"></script>
+<style>
+    img[data-action="zoom"] {
+        cursor: pointer;
+        cursor: -webkit-zoom-in;
+        cursor: -moz-zoom-in;
+    }
+
+    .zoom-img,
+    .zoom-img-wrap {
+        position: relative;
+        z-index: 666;
+        -webkit-transition: all 300ms;
+        -o-transition: all 300ms;
+        transition: all 300ms;
+    }
+
+    img.zoom-img {
+        cursor: pointer;
+        cursor: -webkit-zoom-out;
+        cursor: -moz-zoom-out;
+    }
+
+    .zoom-overlay {
+        z-index: 420;
+        background: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        filter: "alpha(opacity=0)";
+        opacity: 0;
+        -webkit-transition: opacity 300ms;
+        -o-transition: opacity 300ms;
+        transition: opacity 300ms;
+    }
+
+    .zoom-overlay-open .zoom-overlay {
+        filter: "alpha(opacity=100)";
+        opacity: 1;
+    }
+
+    .zoom-overlay-open,
+    .zoom-overlay-transitioning {
+        cursor: default;
+    }
+</style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -87,7 +137,8 @@
                                         <label>Foto Kartu Keluarga </label>
                                         @if ($peserta->foto_kartu_keluarga)
                                         <br>
-                                        <img src="{{ asset('backend/image/' . $peserta->foto_kartu_keluarga) }}" alt=""
+                                        <img data-action="zoom"
+                                            src="{{ asset('backend/image/' . $peserta->foto_kartu_keluarga) }}" alt=""
                                             width="200">
                                         @else
                                         <br>
@@ -99,8 +150,9 @@
                                         <label>Foto Surat Pernyataan </label>
                                         @if ($peserta->foto_surat_pernyataan)
                                         <br>
-                                        <img src="{{ asset('backend/image/' . $peserta->foto_surat_pernyataan) }}"
-                                            alt="" width="200">
+                                        <img data-action="zoom"
+                                            src="{{ asset('backend/image/' . $peserta->foto_surat_pernyataan) }}" alt=""
+                                            width="200">
                                         @else
                                         <br>
                                         <label class="text-danger">Tidak Ada Foto/ Belum Upload Surat Pernyataan
@@ -111,7 +163,8 @@
                                         <label>Foto Siswa/ Siswi </label>
                                         @if ($peserta->foto_siswa)
                                         <br>
-                                        <img src="{{ asset('backend/image/' . $peserta->foto_siswa) }}" alt=""
+                                        <img data-action="zoom"
+                                            src="{{ asset('backend/image/' . $peserta->foto_siswa) }}" alt=""
                                             width="200">
                                         @else
                                         <br>
@@ -165,7 +218,8 @@
                                         <label>Foto Akta </label>
                                         @if ($peserta->foto_akta_lahir)
                                         <br>
-                                        <img src="{{ asset('backend/image/' . $peserta->foto_akta_lahir) }}" alt=""
+                                        <img data-action="zoom"
+                                            src="{{ asset('backend/image/' . $peserta->foto_akta_lahir) }}" alt=""
                                             width="200">
                                         @else
                                         <br>
@@ -214,13 +268,6 @@
 @endsection
 
 @push('page-script')
-<script src="{{ asset('css/image-zoom.css') }}"></script>
-<script src="{{ asset('js/image-zoom.js') }}"></script>
-<script>
-    $(function() {
-            $('.my-gallery').imageZoom({
-                $(this).imageZoom();
-            });
-        });
-</script>
+
+
 @endpush
