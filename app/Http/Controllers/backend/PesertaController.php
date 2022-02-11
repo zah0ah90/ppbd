@@ -360,17 +360,17 @@ class PesertaController extends Controller
         // 3 Menuggu konfirmasi
         if ($status == 3) {
             echo '
-            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat%20kepada%20para%20peserta%20siswa/siswa%20' . $data['nama_lengkap'] . '%20telah%20terpilih%20untuk%20menjadi%20calon%20siswa/siswi%20untuk%20melengkapi%20langkah%20selanjut%20nya,%20dengan%20mentransfer%20sejumlah%20xxx%20ke%20Rekening%20BCA%20xxx%20a/n%20Andri%20Agustina%20dan%20kirimkan%20bukti%20transfer%20ke%20nomor%20ini%20Terimakasih</textarea>
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat!%20' . $data['nama_lengkap'] . '%20lolos%20seleksi%20administrasi%20Mohon%20untuk%20melakukan%20pembayaran%20baju%20olahraga%20siswa/siswi%20sejumlah%20Rp.%20xxx,%20pada%20Nomor%20rekening%20Bank%20BRI%20xxx%20a/n%20SD%20Negeri%20Nurul%20Salam,%20unggah%20bukti%20pembayaran%20pada%20chat%20whatsapp%20ini.</textarea>
             <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
             ';
         } else if ($status == 0) {
             echo '
-            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Mohon%20maaf%20siswa/siswi%20' . $data['nama_lengkap'] . '%20tidak%20dapat%20di%20proses%20lebih%20lanjut,%20terimakasih%20sudah%20mendaftar%20ppdb%20online%20SDN%20NURUL%20SALAM</textarea>
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Mohon%20maaf!%20Data%20yang%20anda%20kirim%20belum%20memenuhi%20syarat%20pendaftaran!%20Untuk%20info%20lebih%20lanjut%20silahkan%20kunjungi%20laman%20web%20www.sdnnurulsalam.ac.id%20pada%20menu%20status%20pendaftaran</textarea>
             <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
             ';
         } else if ($status == 1) {
             echo '
-            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat%20kepada%20peserta%20siswa/siswi%20' . $data['nama_lengkap'] . '%20telah%20menjadi%20siswa/siswi,%20Terimakasih%20telah%20mendaftar%20di%20PPDB%20ONLINE%20SDN%20NURUL%20ALAM</textarea>
+            <textarea hidden name="text" class="textarea" id="" cols="30" rows="10">https://api.whatsapp.com/send?phone=62' . $nomor_whatsapp . '&text=Selamat%20' . $data['nama_lengkap'] . '%20diterima%20menjadi%20siswa/siswi%20SD%20Negeri%20Nurul%20Salam%20Silakan%20cetak%20bukti%20pendaftaran%20anda%20pada%20laman%20web%20www.sdnnurulsalam.ac.id%20pada%20menu%20status%20pendaftaran</textarea>
             <button hidden id="click" href="#" class="btn btn-danger">Jquery Auto Click</button>
             ';
         }
