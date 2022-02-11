@@ -128,11 +128,11 @@
                                         <input type="text" disabled class="form-control" name="golongan_darah"
                                             id="golongan_darah" value="{{ $peserta->golongan_darah }}">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label>Alamat </label>
                                         <input type="text" disabled class="form-control" name="alamat" id="alamat"
                                             value="{{ $peserta->alamat }}">
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         <label>Foto Kartu Keluarga </label>
                                         @if ($peserta->foto_kartu_keluarga)
